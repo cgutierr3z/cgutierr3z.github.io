@@ -4,7 +4,7 @@ Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Presenta servi
 
 - **Sitio:** https://cgutierr3z.github.io/
 - **Especificación:** [`docs/spec-001.md`](docs/spec-001.md)
-- **Estado:** MVP implementado; deploy pendiente del content gate
+- **Estado:** MVP desplegado y validado en GitHub Pages
 
 ## Stack
 
@@ -75,11 +75,16 @@ Las cadenas principales de interfaz se encuentran en `src/i18n/es.ts`; parte del
 
 El despliegue se realiza con GitHub Actions al hacer merge a `master`. El workflow ejecuta `bun run check`, `bun run build`, Playwright/axe y solo publica si todo pasa.
 
-Configuración requerida en GitHub:
+Configuración en GitHub:
 
-1. Ir a **Settings → Pages**.
-2. Seleccionar **Source: GitHub Actions**.
-3. Hacer merge a `master` o ejecutar el workflow manualmente.
+1. **Settings → Pages → Source: GitHub Actions** (ya configurado).
+2. Hacer merge a `master` o ejecutar el workflow manualmente.
+
+Despliegue validado:
+
+- Workflow `Deploy to GitHub Pages`: run `39369166799`, jobs `build` y `deploy` en verde.
+- Home, CV, 404, sitemap, robots y OG image responden correctamente.
+- Smoke live: 8 secciones, tema persistente, menú móvil accesible, 0 errores de consola y 0 violaciones axe críticas/serias.
 
 ## Confidencialidad
 
