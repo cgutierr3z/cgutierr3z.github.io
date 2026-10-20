@@ -17,6 +17,8 @@ export const es = {
 		case: 'Caso',
 		scope: 'Ámbito',
 		caseDetail: 'Detalle del caso',
+		otherNote:
+			'Estos proyectos se presentan como parte de mi formación académica y exploración técnica, no como trabajos para clientes.',
 	},
 	serviceScopes: {
 		'web-development': 'Aplicaciones',
@@ -79,6 +81,7 @@ export const es = {
     historicalData: 'Datos históricos de 2020.',
     demoUnavailable: 'La demo original ya no está disponible.',
     technologies: 'Tecnologías',
+    stack: 'Stack',
     achievements: 'Logros',
     responsibilities: 'Responsabilidades',
   },

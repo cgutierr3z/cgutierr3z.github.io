@@ -1,5 +1,5 @@
 ---
-import ProjectCard from './ProjectCard.astro';
+import Icon from './Icon.astro';
 import ReportSection from './ReportSection.astro';
 import { otherProjects } from '../data/projects';
 import { es } from '../i18n/es';
@@ -18,6 +18,8 @@ const groups = [
 		projects: otherProjects.filter((project) => project.category === 'games'),
 	},
 ].filter((group) => group.projects.length > 0);
+
+let counter = 0;
 ---
 
 <ReportSection
@@ -30,21 +32,69 @@ const groups = [
 	<div class="space-y-10">
 		{
 			groups.map((group) => (
-				<div>
-					<h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
-						{group.title}
-					</h3>
-					<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-						{group.projects.map((project) => (
-							<ProjectCard project={project} compact />
-						))}
+				<section aria-labelledby={`otros-${group.id}-title`}>
+					<div class="flex items-baseline justify-between gap-4 border-b border-rule-strong pb-2">
+						<h3 id={`otros-${group.id}-title`} class="text-xl">
+							{group.title}
+						</h3>
+						<p class="data text-ink-soft">
+							{`${group.projects.length}`.padStart(2, '0')}
+						</p>
 					</div>
-				</div>
+
+					<ol>
+						{group.projects.map((project) => {
+							counter += 1;
+							const number = `03.${counter}`;
+							return (
+								<li class="grid gap-x-4 gap-y-3 border-b border-rule py-5 md:grid-cols-[4rem_minmax(0,1fr)_8rem_4rem_minmax(0,10rem)_auto] md:items-baseline">
+									<p class="data text-oxide">{number}</p>
+
+									<h4 class="text-base font-semibold leading-snug">
+										{project.title}
+									</h4>
+
+									<dl class="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-3 gap-y-1 text-sm text-ink-soft md:contents">
+										<dt class="data md:hidden">{es.projectMeta.type}</dt>
+										<dd class="text-sm">
+											{es.projectTypes[project.type]}
+										</dd>
+
+										<dt class="data md:hidden">{es.projectMeta.year}</dt>
+										<dd class="data-plain text-sm">
+											{project.year}
+										</dd>
+
+										<dt class="data md:hidden">{es.labels.stack}</dt>
+										<dd class="text-xs leading-relaxed">
+											{project.stack.join(' · ')}
+										</dd>
+									</dl>
+
+									<div class="md:col-start-6 md:text-right">
+										{project.links.map((link) => (
+											<a
+												href={link.url}
+												target="_blank"
+												rel="noopener noreferrer"
+												aria-label={`${link.label} de ${project.title}. ${es.a11y.externalLink}`}
+												class="inline-flex items-center gap-1.5 text-sm font-semibold text-oxide transition-colors hover:text-oxide-strong"
+											>
+												{link.label}
+												<Icon name="external" class="h-3.5 w-3.5" />
+											</a>
+										))}
+									</div>
+								</li>
+							);
+						})}
+					</ol>
+				</section>
 			))
 		}
 	</div>
-	<p class="mt-8 max-w-3xl text-sm leading-relaxed text-[var(--color-muted)]">
-		Estos proyectos se presentan como parte de mi formación académica y
-		exploración técnica, no como trabajos para clientes.
+
+	<p class="prose-measure mt-8 text-sm leading-relaxed text-ink-soft">
+		{es.report.otherNote}
 	</p>
 </ReportSection>
