@@ -34,6 +34,7 @@ lighthouse-report.html
 
 # CV local sin sanear: contiene datos confidenciales; no publicar
 assets/CV_ATS_2026_Carlos_Gutierrez.pdf
+public/assets/CV_ATS_2026_Carlos_Gutierrez.pdf
 
 # OS and editor files
 .DS_Store
