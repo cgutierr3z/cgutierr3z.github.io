@@ -1,0 +1,49 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import Section from './Section.astro';
+import { otherProjects } from '../data/projects';
+import { es } from '../i18n/es';
+
+const groups = [
+	{
+		id: 'fundamentals',
+		title: es.projectCategories.fundamentals,
+		projects: otherProjects.filter(
+			(project) => project.category === 'fundamentals',
+		),
+	},
+	{
+		id: 'games',
+		title: es.projectCategories.games,
+		projects: otherProjects.filter((project) => project.category === 'games'),
+	},
+].filter((group) => group.projects.length > 0);
+---
+
+<Section
+	id="otros-proyectos"
+	eyebrow="Explorando"
+	title={es.sections.otherProjects}
+	description="Proyectos académicos y experimentos que complementan mi formación y mi curiosidad técnica."
+>
+	<div class="space-y-10">
+		{
+			groups.map((group) => (
+				<div>
+					<h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+						{group.title}
+					</h3>
+					<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						{group.projects.map((project) => (
+							<ProjectCard project={project} compact />
+						))}
+					</div>
+				</div>
+			))
+		}
+	</div>
+	<p class="mt-8 max-w-3xl text-sm leading-relaxed text-[var(--color-muted)]">
+		Estos proyectos se presentan como parte de mi formación académica y
+		exploración técnica, no como trabajos para clientes.
+	</p>
+</Section>

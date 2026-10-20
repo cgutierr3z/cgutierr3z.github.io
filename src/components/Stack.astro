@@ -1,0 +1,31 @@
+---
+import Section from './Section.astro';
+import { technologies } from '../data/technologies';
+import { es } from '../i18n/es';
+---
+
+<Section
+	id="stack"
+	eyebrow="Herramientas"
+	title={es.sections.stack}
+	description="Tecnologías con las que he trabajado en aplicaciones empresariales, integraciones y procesos de datos."
+>
+	<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+		{
+			technologies.map((group) => (
+				<article class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+					<h3 class="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)]">
+						{group.category}
+					</h3>
+					<ul class="mt-4 flex flex-wrap gap-2">
+						{group.items.map((technology) => (
+							<li class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-2.5 py-1 text-sm text-[var(--color-text)]">
+								{technology}
+							</li>
+						))}
+					</ul>
+				</article>
+			))
+		}
+	</div>
+</Section>

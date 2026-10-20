@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { es } from '../i18n/es';
+---
+
+<BaseLayout
+	title={`${es.notFound.title} | Carlos Gutierrez`}
+	description={es.notFound.description}
+	noindex
+>
+	<main
+		id="main"
+		class="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-20"
+	>
+		<p
+			class="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]"
+		>
+			404
+		</p>
+		<h1 class="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+			{es.notFound.title}
+		</h1>
+		<p class="mt-4 text-base leading-relaxed text-[var(--color-muted)]">
+			{es.notFound.description}
+		</p>
+		<a
+			href="/"
+			class="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)]"
+		>
+			{es.notFound.backHome}
+		</a>
+	</main>
+</BaseLayout>
