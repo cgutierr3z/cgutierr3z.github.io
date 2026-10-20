@@ -1,0 +1,70 @@
+---
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import { profile } from '../data/profile';
+import { es } from '../i18n/es';
+---
+
+<Section
+	id="contacto"
+	eyebrow="Contacto"
+	title="Hablemos"
+	description="¿Tienes un proyecto o una oportunidad? Estoy abierto a conversar."
+>
+	<div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-10">
+		<div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+			<div class="max-w-2xl">
+				<h3 class="text-2xl font-semibold tracking-tight">
+					Construyamos algo juntos
+				</h3>
+				<p class="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+					{profile.email
+						? 'Puedes escribirme por email o LinkedIn, o revisar mi trabajo en GitHub. Respondo a oportunidades laborales y proyectos de desarrollo.'
+						: 'Puedes escribirme por LinkedIn o revisar mi trabajo en GitHub. Respondo a oportunidades laborales y proyectos de desarrollo.'}
+				</p>
+			</div>
+
+			<div class="flex flex-wrap gap-3">
+				{
+					profile.email ? (
+						<a
+							href={`mailto:${profile.email}`}
+							class="inline-flex items-center gap-2 rounded-md bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)]"
+						>
+							<Icon name="mail" class="h-4 w-4" />
+							{es.ctas.contact}
+						</a>
+					) : (
+						<a
+							href={profile.linkedin}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center gap-2 rounded-md bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)]"
+						>
+							{es.ctas.contact}
+							<Icon name="external" class="h-4 w-4" />
+						</a>
+					)
+				}
+				<a
+					href={profile.github}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-5 py-3 text-sm font-semibold transition-colors hover:border-[var(--color-accent)]"
+				>
+					{es.ctas.github}
+					<Icon name="external" class="h-4 w-4" />
+				</a>
+				<a
+					href={profile.linkedin}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-5 py-3 text-sm font-semibold transition-colors hover:border-[var(--color-accent)]"
+				>
+					{es.ctas.linkedin}
+					<Icon name="external" class="h-4 w-4" />
+				</a>
+			</div>
+		</div>
+	</div>
+</Section>

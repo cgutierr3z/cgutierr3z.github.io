@@ -1,0 +1,188 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+import { es } from '../i18n/es';
+---
+
+<section
+	id="inicio"
+	class="relative overflow-hidden border-b border-[var(--color-border)]"
+	aria-labelledby="hero-title"
+>
+	<div
+		aria-hidden="true"
+		class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--color-accent)] opacity-10 blur-3xl"
+	>
+	</div>
+
+	<div
+		class="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-28"
+	>
+		<div>
+			<h1 id="hero-title" class="mt-4 max-w-3xl">
+				<span
+					class="block text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]"
+				>
+					{profile.name}
+				</span>
+				<span
+					class="mt-4 block text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+				>
+					{profile.role}
+				</span>
+			</h1>
+
+			<p
+				class="mt-6 max-w-2xl text-lg font-medium leading-relaxed sm:text-xl"
+			>
+				{profile.tagline}
+			</p>
+
+			<p
+				class="mt-4 max-w-2xl text-base leading-relaxed text-[var(--color-muted)]"
+			>
+				{profile.summary}
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center gap-3">
+				<a
+					href="#proyectos"
+					class="inline-flex items-center gap-2 rounded-md bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)]"
+				>
+					{es.ctas.projects}
+					<Icon name="arrow" class="h-4 w-4" />
+				</a>
+				<a
+					href="#contacto"
+					class="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-sm font-semibold transition-colors hover:border-[var(--color-accent)]"
+				>
+					{es.ctas.contact}
+				</a>
+				{
+					profile.cvUrl && (
+						<a
+							href={profile.cvUrl}
+							class="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-sm font-semibold transition-colors hover:border-[var(--color-accent)]"
+							download
+						>
+							{es.ctas.cv}
+						</a>
+					)
+				}
+			</div>
+
+			<div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+				<a
+					href={profile.github}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-1.5 font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+				>
+					GitHub
+					<span class="sr-only">{es.a11y.externalLink}</span>
+					<Icon name="external" class="h-3.5 w-3.5" />
+				</a>
+				<a
+					href={profile.linkedin}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-1.5 font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+				>
+					LinkedIn
+					<span class="sr-only">{es.a11y.externalLink}</span>
+					<Icon name="external" class="h-3.5 w-3.5" />
+				</a>
+				{
+					profile.location && (
+						<span class="text-[var(--color-muted)]">{profile.location}</span>
+					)
+				}
+				{
+					profile.availability && (
+						<span class="inline-flex items-center gap-1.5 text-[var(--color-accent)]">
+							<span class="h-1.5 w-1.5 rounded-full bg-current" />
+							{profile.availability}
+						</span>
+					)
+				}
+			</div>
+		</div>
+
+		<aside
+			class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm sm:p-8"
+			aria-label="Resumen profesional"
+		>
+			<div class="flex items-center gap-4">
+				{
+					profile.photo ? (
+						<img
+							src={profile.photo}
+							alt={`Foto de ${profile.name}`}
+							class="h-16 w-16 rounded-2xl object-cover"
+							width="64"
+							height="64"
+						/>
+					) : (
+						<span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-xl font-bold text-[var(--color-accent-contrast)]">
+							CG
+						</span>
+					)
+				}
+				<div>
+					<p class="font-semibold">{profile.name}</p>
+					<p class="text-sm text-[var(--color-muted)]">{profile.role}</p>
+				</div>
+			</div>
+
+			<dl class="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 text-sm">
+				<div>
+					<dt class="text-[var(--color-muted)]">Backend</dt>
+					<dd class="mt-1 font-medium">PHP · Node.js</dd>
+				</div>
+				<div>
+					<dt class="text-[var(--color-muted)]">Frontend</dt>
+					<dd class="mt-1 font-medium">React · Form.io</dd>
+				</div>
+				<div>
+					<dt class="text-[var(--color-muted)]">Datos</dt>
+					<dd class="mt-1 font-medium">DB2 · PostgreSQL</dd>
+				</div>
+				<div>
+					<dt class="text-[var(--color-muted)]">Cloud</dt>
+					<dd class="mt-1 font-medium">AWS Lambda</dd>
+				</div>
+			</dl>
+
+			<div class="mt-8 border-t border-[var(--color-border)] pt-6">
+				<p
+					class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]"
+				>
+					Enfoque
+				</p>
+				<ul class="mt-3 space-y-2 text-sm">
+					<li class="flex items-start gap-2">
+						<Icon
+							name="check"
+							class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+						/>
+						Aplicaciones empresariales
+					</li>
+					<li class="flex items-start gap-2">
+						<Icon
+							name="check"
+							class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+						/>
+						Migraciones PHP → React
+					</li>
+					<li class="flex items-start gap-2">
+						<Icon
+							name="check"
+							class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+						/>
+						APIs, datos y soporte
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</div>
+</section>

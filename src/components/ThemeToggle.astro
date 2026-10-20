@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<button
+	id="theme-toggle"
+	type="button"
+	class:list={[
+		'theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-text)]',
+		className,
+	]}
+	aria-label="Cambiar tema"
+	aria-pressed="false"
+>
+	<Icon name="sun" class="theme-icon-sun h-5 w-5" />
+	<Icon name="moon" class="theme-icon-moon h-5 w-5" />
+</button>
+
+<script is:inline>
+	(() => {
+		const buttons = document.querySelectorAll('.theme-toggle');
+		if (buttons.length === 0) return;
+
+		const root = document.documentElement;
+
+		const updateLabels = () => {
+			const isDark = root.dataset.theme === 'dark';
+			buttons.forEach((button) => {
+				button.setAttribute(
+					'aria-label',
+					isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro',
+				);
+				button.setAttribute('aria-pressed', String(isDark));
+			});
+		};
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+				root.dataset.theme = next;
+				try {
+					localStorage.setItem('theme', next);
+				} catch {
+					// Si localStorage no está disponible, el tema cambia solo en la sesión.
+				}
+				updateLabels();
+			});
+		});
+
+		updateLabels();
+	})();
+</script>

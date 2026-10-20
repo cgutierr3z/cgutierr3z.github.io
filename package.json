@@ -1,0 +1,35 @@
+{
+  "name": "cgutierr3z-portfolio",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "packageManager": "bun@1.4.3",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:a11y": "playwright test tests/a11y.spec.ts",
+    "test:lighthouse": "lighthouse http://127.0.0.1:4321 --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless=new\" --only-categories=performance,accessibility,best-practices,seo",
+    "cv:generate": "node scripts/generate-cv.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.4.1",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.11",
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "lighthouse": "13.5.0",
+    "typescript": "6.0.3"
+  }
+}

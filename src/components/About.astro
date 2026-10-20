@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import { profile } from '../data/profile';
+import { es } from '../i18n/es';
+---
+
+<Section
+	id="sobre-mi"
+	eyebrow="Perfil"
+	title={es.sections.about}
+>
+	<div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+		<div class="max-w-2xl space-y-4 text-base leading-relaxed text-[var(--color-muted)]">
+			<p>
+				Soy {profile.name}, desarrollador Full Stack. He trabajado en
+				aplicaciones empresariales, migración de formularios a React +
+				Form.io, integración de APIs y procesos de migración de datos.
+			</p>
+			<p>
+				Me enfoco en construir soluciones mantenibles y acompañar su
+				evolución: desde el desarrollo y la integración hasta el soporte
+				de aplicaciones en producción.
+			</p>
+		</div>
+
+		<aside class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+			<h3 class="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)]">
+				Enfoque
+			</h3>
+			<ul class="mt-4 space-y-3 text-sm">
+				<li class="flex items-start gap-2">
+					<Icon
+						name="check"
+						class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+					/>
+					Aplicaciones mantenibles y estables
+				</li>
+				<li class="flex items-start gap-2">
+					<Icon
+						name="check"
+						class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+					/>
+					Migraciones sin interrumpir la operación
+				</li>
+				<li class="flex items-start gap-2">
+					<Icon
+						name="check"
+						class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+					/>
+					APIs, datos y soporte en producción
+				</li>
+				<li class="flex items-start gap-2">
+					<Icon
+						name="check"
+						class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
+					/>
+					Trabajo colaborativo con Scrum
+				</li>
+			</ul>
+		</aside>
+	</div>
+</Section>

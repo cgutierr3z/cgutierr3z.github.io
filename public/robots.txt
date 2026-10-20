@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cgutierr3z.github.io/sitemap-index.xml

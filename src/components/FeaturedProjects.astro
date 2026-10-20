@@ -1,0 +1,21 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import Section from './Section.astro';
+import { featuredProjects } from '../data/projects';
+import { es } from '../i18n/es';
+---
+
+<Section
+	id="proyectos"
+	eyebrow="Trabajo seleccionado"
+	title={es.sections.featuredProjects}
+	description="Proyectos web y Full Stack que muestran mi experiencia con aplicaciones, APIs y datos."
+>
+	<div class="grid gap-4 lg:grid-cols-3">
+		{
+			featuredProjects.map((project) => (
+				<ProjectCard project={project} />
+			))
+		}
+	</div>
+</Section>

@@ -1,0 +1,41 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Local OpenCode configuration
+opencode.json
+
+# Agent memory & config
+.engram/
+skills-lock.json
+.agents/
+
+# Tests and reports
+playwright-report/
+test-results/
+lighthouse-report.html
+.lighthouseci/
+
+# CV local sin sanear: contiene datos confidenciales; no publicar
+assets/CV_ATS_2026_Carlos_Gutierrez.pdf
+public/assets/CV_ATS_2026_Carlos_Gutierrez.pdf
+
+# OS and editor files
+.DS_Store
+.idea/
