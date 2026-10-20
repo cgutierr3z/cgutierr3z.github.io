@@ -1,188 +1,138 @@
 ---
 import Icon from './Icon.astro';
+import TitleBlock from './drawing/TitleBlock.astro';
+import LoadPath from './drawing/LoadPath.astro';
 import { profile } from '../data/profile';
+import { featuredProjects } from '../data/projects';
 import { es } from '../i18n/es';
 ---
 
 <section
 	id="inicio"
-	class="relative overflow-hidden border-b border-[var(--color-border)]"
+	class="sheet-grid relative overflow-hidden border-b border-rule"
 	aria-labelledby="hero-title"
 >
-	<div
+	<span
 		aria-hidden="true"
-		class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--color-accent)] opacity-10 blur-3xl"
-	>
-	</div>
+		class="pointer-events-none absolute left-4 top-4 font-mono text-xl font-bold text-rule-strong select-none"
+	>+</span>
+	<span
+		aria-hidden="true"
+		class="pointer-events-none absolute right-4 top-4 font-mono text-xl font-bold text-rule-strong select-none"
+	>+</span>
+	<span
+		aria-hidden="true"
+		class="pointer-events-none absolute bottom-4 left-4 font-mono text-xl font-bold text-rule-strong select-none"
+	>+</span>
+	<span
+		aria-hidden="true"
+		class="pointer-events-none absolute bottom-4 right-4 font-mono text-xl font-bold text-rule-strong select-none"
+	>+</span>
 
-	<div
-		class="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-28"
-	>
-		<div>
-			<h1 id="hero-title" class="mt-4 max-w-3xl">
-				<span
-					class="block text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]"
-				>
-					{profile.name}
-				</span>
-				<span
-					class="mt-4 block text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
-				>
-					{profile.role}
-				</span>
-			</h1>
+	<div class="relative mx-auto max-w-6xl px-6 pb-12 pt-14 sm:pb-14 sm:pt-16 lg:pb-16 lg:pt-20">
+		<div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,21rem)] lg:items-start lg:gap-14">
+			<div>
+				<TitleBlock name={profile.name} role={profile.role} />
 
-			<p
-				class="mt-6 max-w-2xl text-lg font-medium leading-relaxed sm:text-xl"
-			>
-				{profile.tagline}
-			</p>
-
-			<p
-				class="mt-4 max-w-2xl text-base leading-relaxed text-[var(--color-muted)]"
-			>
-				{profile.summary}
-			</p>
-
-			<div class="mt-8 flex flex-wrap items-center gap-3">
-				<a
-					href="#proyectos"
-					class="inline-flex items-center gap-2 rounded-md bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)]"
-				>
-					{es.ctas.projects}
-					<Icon name="arrow" class="h-4 w-4" />
-				</a>
-				<a
-					href="#contacto"
-					class="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-sm font-semibold transition-colors hover:border-[var(--color-accent)]"
-				>
-					{es.ctas.contact}
-				</a>
-				{
-					profile.cvUrl && (
-						<a
-							href={profile.cvUrl}
-							class="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-sm font-semibold transition-colors hover:border-[var(--color-accent)]"
-							download
-						>
-							{es.ctas.cv}
-						</a>
-					)
-				}
-			</div>
-
-			<div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-				<a
-					href={profile.github}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="inline-flex items-center gap-1.5 font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
-				>
-					GitHub
-					<span class="sr-only"> {es.a11y.externalLink}</span>
-					<Icon name="external" class="h-3.5 w-3.5" />
-				</a>
-				<a
-					href={profile.linkedin}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="inline-flex items-center gap-1.5 font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
-				>
-					LinkedIn
-					<span class="sr-only"> {es.a11y.externalLink}</span>
-					<Icon name="external" class="h-3.5 w-3.5" />
-				</a>
-				{
-					profile.location && (
-						<span class="text-[var(--color-muted)]">{profile.location}</span>
-					)
-				}
-				{
-					profile.availability && (
-						<span class="inline-flex items-center gap-1.5 text-[var(--color-accent)]">
-							<span class="h-1.5 w-1.5 rounded-full bg-current" />
-							{profile.availability}
-						</span>
-					)
-				}
-			</div>
-		</div>
-
-		<aside
-			class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm sm:p-8"
-			aria-label="Resumen profesional"
-		>
-			<div class="flex items-center gap-4">
-				{
-					profile.photo ? (
-						<img
-							src={profile.photo}
-							alt={`Foto de ${profile.name}`}
-							class="h-16 w-16 rounded-2xl object-cover"
-							width="64"
-							height="64"
-						/>
-					) : (
-						<span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-xl font-bold text-[var(--color-accent-contrast)]">
-							CG
-						</span>
-					)
-				}
-				<div>
-					<p class="font-semibold">{profile.name}</p>
-					<p class="text-sm text-[var(--color-muted)]">{profile.role}</p>
-				</div>
-			</div>
-
-			<dl class="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 text-sm">
-				<div>
-					<dt class="text-[var(--color-muted)]">Backend</dt>
-					<dd class="mt-1 font-medium">PHP · Node.js</dd>
-				</div>
-				<div>
-					<dt class="text-[var(--color-muted)]">Frontend</dt>
-					<dd class="mt-1 font-medium">React · Form.io</dd>
-				</div>
-				<div>
-					<dt class="text-[var(--color-muted)]">Datos</dt>
-					<dd class="mt-1 font-medium">DB2 · PostgreSQL</dd>
-				</div>
-				<div>
-					<dt class="text-[var(--color-muted)]">Cloud</dt>
-					<dd class="mt-1 font-medium">AWS Lambda</dd>
-				</div>
-			</dl>
-
-			<div class="mt-8 border-t border-[var(--color-border)] pt-6">
-				<p
-					class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]"
-				>
-					Enfoque
+				<p class="mt-7 max-w-2xl text-lg font-semibold leading-relaxed">
+					{profile.tagline}
 				</p>
-				<ul class="mt-3 space-y-2 text-sm">
-					<li class="flex items-start gap-2">
-						<Icon
-							name="check"
-							class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
-						/>
-						Aplicaciones empresariales
+				<p class="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
+					{profile.summary}
+				</p>
+
+				<div class="mt-7 flex flex-wrap items-center gap-3">
+					<a
+						href="#proyectos"
+						class="inline-flex items-center gap-2 rounded-md bg-oxide px-5 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong"
+					>
+						{es.ctas.projects}
+						<Icon name="arrow" class="h-4 w-4" />
+					</a>
+					{
+						profile.cvUrl && (
+							<a
+								href={profile.cvUrl}
+								download
+								class="inline-flex items-center gap-2 rounded-md border border-rule-strong bg-paper px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-oxide"
+							>
+								{es.ctas.cv}
+							</a>
+						)
+					}
+				</div>
+
+				<ul class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm text-ink-soft">
+					<li>
+						<a
+							href={profile.github}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center gap-1.5 transition-colors hover:text-ink"
+						>
+							{es.ctas.github}
+							<Icon name="external" class="h-3.5 w-3.5" />
+							<span class="sr-only"> {es.a11y.externalLink}</span>
+						</a>
 					</li>
-					<li class="flex items-start gap-2">
-						<Icon
-							name="check"
-							class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
-						/>
-						Migraciones PHP → React
+					<li>
+						<a
+							href={profile.linkedin}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center gap-1.5 transition-colors hover:text-ink"
+						>
+							{es.ctas.linkedin}
+							<Icon name="external" class="h-3.5 w-3.5" />
+							<span class="sr-only"> {es.a11y.externalLink}</span>
+						</a>
 					</li>
-					<li class="flex items-start gap-2">
-						<Icon
-							name="check"
-							class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
-						/>
-						APIs, datos y soporte
+					<li>
+						<a
+							href="#contacto"
+							class="inline-flex underline decoration-rule-strong underline-offset-4 transition-colors hover:decoration-oxide"
+						>
+							{es.drawing.contact}
+						</a>
 					</li>
 				</ul>
 			</div>
-		</aside>
+
+			<LoadPath class="shrink-0" />
+		</div>
+
+		<div class="mt-6 border-t border-rule pt-4">
+			<p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
+				{es.drawing.featuredIndex}
+			</p>
+			<ol class="mt-3 grid gap-2 sm:grid-cols-3">
+				{
+					featuredProjects.map((project, index) => (
+						<li>
+							<a
+								href="#proyectos"
+								class="group flex items-baseline gap-3 border border-rule bg-paper-raised px-4 py-3 transition-colors hover:border-oxide"
+							>
+								<span class="font-mono text-xs text-ink-soft">
+									{`01.${index + 1}`}
+								</span>
+								<span class="font-semibold text-ink transition-colors group-hover:text-oxide">
+									{project.title}
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ol>
+		</div>
 	</div>
 </section>
+
+<style>
+	.sheet-grid {
+		background-image:
+			linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+			linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+		background-size: 56px 56px;
+	}
+</style>

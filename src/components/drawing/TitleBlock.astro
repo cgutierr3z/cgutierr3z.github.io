@@ -1,28 +1,51 @@
 ---
-import Annotation from './Annotation.astro';
 import { es } from '../../i18n/es';
 
 interface Props {
 	name: string;
 	role: string;
-	sheet?: string;
+	id?: string;
 }
 
-const { name, role, sheet = '00' } = Astro.props;
+const {
+	name,
+	role,
+	id = 'hero-title',
+} = Astro.props;
 ---
 
-<div class="border border-rule bg-paper-raised p-5">
-	<div class="flex flex-wrap items-baseline justify-between gap-4">
+<header class="border border-rule bg-paper-raised p-5 sm:p-6">
+	<h1 id={id} class="font-sans text-4xl font-bold tracking-tight sm:text-5xl">
+		<span class="block">{name}</span>
 		<span
-			class="font-mono text-xs tracking-[0.16em] text-[color:var(--color-ink-soft)]"
-			aria-hidden="true"
+			class="mt-2 block font-mono text-base font-normal uppercase tracking-[0.16em] text-ink-soft sm:text-lg"
 		>
-			{es.drawing.titleBlock}
+			{role}
 		</span>
-		<Annotation label={es.drawing.year} value={sheet?.toString() ?? ''} />
-	</div>
-	<div class="mt-6">
-		<h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{name}</h1>
-		<p class="mt-2 text-lg font-medium text-[color:var(--color-ink-soft)]">{role}</p>
-	</div>
-</div>
+	</h1>
+
+	<ul
+		class="mt-5 grid grid-cols-2 gap-x-8 gap-y-3 border-t border-rule pt-4 font-mono text-xs tracking-[0.14em] text-ink-soft"
+	>
+		<li class="flex flex-col">
+			<span>{es.drawing.portfolio}</span>
+		</li>
+		<li class="flex flex-col">
+			<span>{es.drawing.sheet}</span>
+			<span class="text-ink">{es.drawing.sheetNumber}</span>
+		</li>
+		<li class="flex flex-col">
+			<span>{es.drawing.scale}</span>
+			<span class="text-ink">{es.drawing.scaleValue}</span>
+		</li>
+		<li class="flex flex-col">
+			<span>{es.drawing.contact}</span>
+			<a
+				href="#contacto"
+				class="text-ink underline decoration-rule-strong underline-offset-4 transition-colors hover:decoration-oxide"
+			>
+				{es.ctas.contact}
+			</a>
+		</li>
+	</ul>
+</header>

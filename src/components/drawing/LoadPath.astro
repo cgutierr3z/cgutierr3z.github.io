@@ -1,0 +1,80 @@
+---
+import { loadPathStages, loadPathMetrics } from '../../data/drawings';
+import { es } from '../../i18n/es';
+
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<figure class:list={['m-0', className]} aria-label={es.drawing.loadPath}>
+	<figcaption
+		class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft"
+	>
+		{es.drawing.loadPath}
+	</figcaption>
+
+	<ol class="mt-3 flex flex-col">
+		{
+			loadPathStages.map((stage, index) => (
+				<li class="flex flex-col">
+					<div class="border border-rule bg-paper-raised px-4 py-3">
+						<p class="flex items-baseline justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+							<span>
+								{`0${index + 1} · ${stage.label}`}
+							</span>
+							<span aria-hidden="true">──</span>
+						</p>
+						<p class="mt-1 text-sm font-medium text-ink">{stage.note}</p>
+						<p class="mt-2 font-mono text-xs text-ink-soft">
+							{stage.technologies.join(' · ')}
+						</p>
+					</div>
+					{index < loadPathStages.length - 1 && (
+						<svg
+							class="mx-auto my-0.5 h-5 w-5 shrink-0 text-oxide"
+							viewBox="0 0 20 20"
+							fill="none"
+							aria-hidden="true"
+						>
+							<path
+								d="M10 1v13"
+								stroke="currentColor"
+								stroke-width="1.5"></path>
+							<path
+								d="M5 10l5 7 5-7"
+								stroke="currentColor"
+								stroke-width="1.5"></path>
+						</svg>
+					)}
+				</li>
+			))
+		}
+	</ol>
+
+	<dl
+		class="mt-4 grid grid-cols-3 gap-2 border-t border-rule pt-4 font-mono"
+	>
+		{
+			loadPathMetrics.map((metric) => (
+				<div class="border border-rule bg-paper-raised px-3 py-2">
+					<dt class="flex min-h-8 items-end text-[10px] uppercase leading-tight tracking-[0.14em] text-ink-soft">
+						{metric.label}
+					</dt>
+					<dd class="mt-1 text-lg font-bold text-ink tabular-nums">
+						{metric.value}
+					</dd>
+				</div>
+			))
+		}
+	</dl>
+
+	<p class="mt-3 font-mono text-[10px] leading-relaxed text-ink-soft">
+		{es.drawing.metricsNote}
+	</p>
+	<span class="sr-only">
+		{es.drawing.loadPathDescription}
+	</span>
+</figure>
