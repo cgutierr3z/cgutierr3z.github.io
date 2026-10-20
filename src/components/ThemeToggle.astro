@@ -13,7 +13,7 @@ const { class: className = '' } = Astro.props;
 	id="theme-toggle"
 	type="button"
 	class:list={[
-		'theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-text)]',
+		'theme-toggle inline-flex h-10 w-10 items-center justify-center border border-rule text-ink-soft transition-colors hover:border-oxide hover:text-ink',
 		className,
 	]}
 	aria-label={es.theme.toggle}

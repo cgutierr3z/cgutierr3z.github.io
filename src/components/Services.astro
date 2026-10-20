@@ -1,13 +1,14 @@
 ---
 import Icon from './Icon.astro';
-import Section from './Section.astro';
+import ReportSection from './ReportSection.astro';
 import { services } from '../data/services';
 import { es } from '../i18n/es';
 ---
 
-<Section
+<ReportSection
 	id="servicios"
-	eyebrow="Qué hago"
+	index="01"
+	label={es.report.services}
 	title={es.sections.services}
 	description="Servicios construidos sobre experiencia real en aplicaciones empresariales, migraciones, APIs y datos."
 >
@@ -26,4 +27,4 @@ import { es } from '../i18n/es';
 			))
 		}
 	</div>
-</Section>
+</ReportSection>

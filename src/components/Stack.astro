@@ -1,12 +1,13 @@
 ---
-import Section from './Section.astro';
+import ReportSection from './ReportSection.astro';
 import { technologies } from '../data/technologies';
 import { es } from '../i18n/es';
 ---
 
-<Section
+<ReportSection
 	id="stack"
-	eyebrow="Herramientas"
+	index="05"
+	label={es.report.stack}
 	title={es.sections.stack}
 	description="Tecnologías con las que he trabajado en aplicaciones empresariales, integraciones y procesos de datos."
 >
@@ -28,4 +29,4 @@ import { es } from '../i18n/es';
 			))
 		}
 	</div>
-</Section>
+</ReportSection>

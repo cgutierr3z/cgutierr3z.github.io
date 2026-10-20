@@ -1,13 +1,14 @@
 ---
 import Icon from './Icon.astro';
-import Section from './Section.astro';
+import ReportSection from './ReportSection.astro';
 import { profile } from '../data/profile';
 import { es } from '../i18n/es';
 ---
 
-<Section
+<ReportSection
 	id="sobre-mi"
-	eyebrow="Perfil"
+	index="06"
+	label={es.report.about}
 	title={es.sections.about}
 >
 	<div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
@@ -60,4 +61,4 @@ import { es } from '../i18n/es';
 			</ul>
 		</aside>
 	</div>
-</Section>
+</ReportSection>

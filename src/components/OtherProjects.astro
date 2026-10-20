@@ -1,6 +1,6 @@
 ---
 import ProjectCard from './ProjectCard.astro';
-import Section from './Section.astro';
+import ReportSection from './ReportSection.astro';
 import { otherProjects } from '../data/projects';
 import { es } from '../i18n/es';
 
@@ -20,9 +20,10 @@ const groups = [
 ].filter((group) => group.projects.length > 0);
 ---
 
-<Section
+<ReportSection
 	id="otros-proyectos"
-	eyebrow="Explorando"
+	index="03"
+	label={es.report.otherProjects}
 	title={es.sections.otherProjects}
 	description="Proyectos académicos y experimentos que complementan mi formación y mi curiosidad técnica."
 >
@@ -46,4 +47,4 @@ const groups = [
 		Estos proyectos se presentan como parte de mi formación académica y
 		exploración técnica, no como trabajos para clientes.
 	</p>
-</Section>
+</ReportSection>

@@ -95,6 +95,9 @@ export const es = {
   footer: {
     rights: 'Todos los derechos reservados.',
     builtWith: 'Hecho con Astro.',
+    index: 'Índice',
+    indexLabel: 'Índice del informe',
+    elsewhere: 'Enlaces',
   },
   notFound: {
     title: 'Página no encontrada',

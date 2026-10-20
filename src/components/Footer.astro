@@ -3,55 +3,92 @@ import { profile } from '../data/profile';
 import { es } from '../i18n/es';
 
 const year = new Date().getFullYear();
+
+const footerNav = [
+	{ href: '#servicios', label: es.nav.services },
+	{ href: '#proyectos', label: es.nav.projects },
+	{ href: '#experiencia', label: es.nav.experience },
+	{ href: '#stack', label: es.nav.stack },
+	{ href: '#sobre-mi', label: es.nav.about },
+	{ href: '#contacto', label: es.nav.contact },
+];
 ---
 
-<footer class="border-t border-[var(--color-border)] py-10">
-	<div
-		class="mx-auto flex max-w-6xl flex-col gap-6 px-6 text-sm text-[var(--color-muted)] sm:flex-row sm:items-center sm:justify-between"
-	>
-		<div>
-			<p class="font-semibold text-[var(--color-text)]">{profile.name}</p>
-			<p class="mt-1">{profile.role}</p>
+<footer class="border-t border-rule-strong pb-10 pt-10">
+	<div class="report-shell">
+		<div class="grid gap-8 md:grid-cols-12">
+			<div class="md:col-span-5">
+				<p class="data text-oxide">
+					{es.report.kicker} / {es.report.period}
+				</p>
+				<p class="mt-3 text-xl font-semibold tracking-tight">{profile.name}</p>
+				<p class="text-sm text-ink-soft">{profile.role}</p>
+			</div>
+
+			<nav class="md:col-span-4" aria-label={es.footer.indexLabel}>
+				<h2 class="data text-ink-soft">{es.footer.index}</h2>
+				<ul class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+					{
+						footerNav.map((item) => (
+							<li>
+								<a href={item.href} class="text-ink-soft transition-colors hover:text-oxide">
+									{item.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<div class="md:col-span-3">
+				<h2 class="data text-ink-soft">{es.footer.elsewhere}</h2>
+				<ul class="mt-3 space-y-2 text-sm">
+					<li>
+						<a
+							href={profile.github}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="link-underline inline-flex items-center gap-1.5 text-ink-soft hover:text-ink"
+						>
+							GitHub
+							<span class="sr-only"> {es.a11y.externalLink}</span>
+							<span aria-hidden="true">↗</span>
+						</a>
+					</li>
+					<li>
+						<a
+							href={profile.linkedin}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="link-underline inline-flex items-center gap-1.5 text-ink-soft hover:text-ink"
+						>
+							LinkedIn
+							<span class="sr-only"> {es.a11y.externalLink}</span>
+							<span aria-hidden="true">↗</span>
+						</a>
+					</li>
+					<li>
+						<a
+							href="https://github.com/cgutierr3z/cgutierr3z.github.io"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="link-underline inline-flex items-center gap-1.5 text-ink-soft hover:text-ink"
+						>
+							{es.labels.repo}
+							<span class="sr-only"> {es.a11y.externalLink}</span>
+							<span aria-hidden="true">↗</span>
+						</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 
-		<div class="flex flex-wrap items-center gap-x-5 gap-y-2">
-			<a
-				href={profile.github}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="transition-colors hover:text-[var(--color-text)]"
-			>
-				GitHub
-				<span class="sr-only"> {es.a11y.externalLink}</span>
-			</a>
-			<a
-				href={profile.linkedin}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="transition-colors hover:text-[var(--color-text)]"
-			>
-				LinkedIn
-				<span class="sr-only"> {es.a11y.externalLink}</span>
-			</a>
-			<a
-				href="https://github.com/cgutierr3z/cgutierr3z.github.io"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="transition-colors hover:text-[var(--color-text)]"
-			>
-				{es.labels.repo}
-				<span class="sr-only"> {es.a11y.externalLink}</span>
-			</a>
-		</div>
-
-		<div class="sm:text-right">
+		<div class="mt-10 flex flex-col gap-2 border-t border-rule pt-4 text-xs text-ink-soft sm:flex-row sm:items-baseline sm:justify-between">
 			<p>© {year} {profile.name}. {es.footer.rights}</p>
-			<p class="mt-1">{es.footer.builtWith}</p>
+			<p>{es.footer.builtWith}</p>
 		</div>
-	</div>
 
-	<div class="mx-auto mt-6 max-w-6xl px-6">
-		<p class="text-xs text-[var(--color-muted)]">
+		<p class="mt-3 text-xs text-ink-soft">
 			{es.labels.confidentialNote}
 		</p>
 	</div>

@@ -12,16 +12,12 @@ const navItems = [
 ];
 ---
 
-<header
-	class="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur"
->
-	<div
-		class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6"
-	>
+<header class="sticky top-0 z-40 border-b border-rule bg-paper">
+	<div class="report-shell flex h-16 items-center justify-between gap-4">
 		<a href="/" class="flex items-center gap-3">
 			<span class="sr-only">{es.header.home}</span>
 			<span
-				class="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-text)] text-sm font-bold text-[var(--color-bg)]"
+				class="flex h-9 w-9 items-center justify-center border border-ink bg-ink font-mono text-xs font-bold tracking-[0.08em] text-paper"
 				aria-hidden="true"
 			>
 				CG
@@ -32,14 +28,14 @@ const navItems = [
 		</a>
 
 		<nav
-			class="hidden items-center gap-6 md:flex"
+			class="hidden items-center gap-7 md:flex"
 			aria-label={es.header.mainNav}
 		>
 			{
 				navItems.map((item) => (
 					<a
 						href={item.href}
-						class="text-sm font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+						class="text-sm font-medium text-ink-soft transition-colors hover:text-oxide"
 					>
 						{item.label}
 					</a>
@@ -51,14 +47,14 @@ const navItems = [
 			<ThemeToggle />
 			<a
 				href="#contacto"
-				class="hidden rounded-md bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)] sm:inline-flex"
+				class="hidden bg-oxide px-4 py-2 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong sm:inline-flex"
 			>
 				{es.ctas.contact}
 			</a>
 			<button
 				id="menu-toggle"
 				type="button"
-				class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-text)] md:hidden"
+				class="inline-flex h-10 w-10 items-center justify-center border border-rule text-ink-soft transition-colors hover:border-oxide hover:text-ink md:hidden"
 				aria-label={es.a11y.openMenu}
 				aria-controls="mobile-menu"
 				aria-expanded="false"
@@ -70,22 +66,15 @@ const navItems = [
 		</div>
 	</div>
 
-	<div
-		id="mobile-menu"
-		hidden
-		class="border-t border-[var(--color-border)] bg-[var(--color-surface)] md:hidden"
-	>
-		<nav
-			class="mx-auto max-w-6xl px-6 py-4"
-			aria-label={es.header.mobileNav}
-		>
+	<div id="mobile-menu" hidden class="border-t border-rule bg-paper-raised md:hidden">
+		<nav class="report-shell py-4" aria-label={es.header.mobileNav}>
 			<ul class="flex flex-col gap-1">
 				{
 					navItems.map((item) => (
 						<li>
 							<a
 								href={item.href}
-								class="block rounded-md px-3 py-2 text-sm font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-text)]"
+								class="block px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-paper hover:text-ink"
 							>
 								{item.label}
 							</a>
@@ -95,7 +84,7 @@ const navItems = [
 			</ul>
 			<a
 				href="#contacto"
-				class="mt-4 inline-flex rounded-md bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)]"
+				class="mt-4 inline-flex bg-oxide px-4 py-2 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong"
 			>
 				{es.ctas.contact}
 			</a>

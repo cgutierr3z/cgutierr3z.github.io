@@ -1,13 +1,14 @@
 ---
 import ProjectCard from './ProjectCard.astro';
-import Section from './Section.astro';
+import ReportSection from './ReportSection.astro';
 import { featuredProjects } from '../data/projects';
 import { es } from '../i18n/es';
 ---
 
-<Section
+<ReportSection
 	id="proyectos"
-	eyebrow="Trabajo seleccionado"
+	index="02"
+	label={es.report.selectedWork}
 	title={es.sections.featuredProjects}
 	description="Proyectos web y Full Stack que muestran mi experiencia con aplicaciones, APIs y datos."
 >
@@ -18,4 +19,4 @@ import { es } from '../i18n/es';
 			))
 		}
 	</div>
-</Section>
+</ReportSection>

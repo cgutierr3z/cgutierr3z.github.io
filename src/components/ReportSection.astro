@@ -1,0 +1,32 @@
+---
+import ChapterHeader from './ChapterHeader.astro';
+
+interface Props {
+  id: string;
+  index: string;
+  title: string;
+  label?: string;
+  description?: string;
+}
+
+const { id, index, title, label, description } = Astro.props;
+---
+
+<section
+	id={id}
+	class="report-section"
+	aria-labelledby={`${id}-title`}
+>
+	<div class="report-shell">
+		<ChapterHeader
+			id={id}
+			index={index}
+			title={title}
+			label={label}
+			description={description}
+		/>
+		<div class="mt-10 md:mt-14">
+			<slot />
+		</div>
+	</div>
+</section>

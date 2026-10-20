@@ -1,14 +1,15 @@
 ---
 import Icon from './Icon.astro';
-import Section from './Section.astro';
+import ReportSection from './ReportSection.astro';
 import { experience } from '../data/experience';
 import { es } from '../i18n/es';
 import { formatMonth } from '../utils/format';
 ---
 
-<Section
+<ReportSection
 	id="experiencia"
-	eyebrow="Trayectoria"
+	index="04"
+	label={es.report.experience}
 	title={es.sections.experience}
 	description="Experiencia en aplicaciones empresariales, migraciones de formularios, APIs y procesos de datos."
 >
@@ -95,4 +96,4 @@ import { formatMonth } from '../utils/format';
 			))
 		}
 	</div>
-</Section>
+</ReportSection>

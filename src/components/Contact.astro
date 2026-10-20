@@ -1,13 +1,14 @@
 ---
 import Icon from './Icon.astro';
-import Section from './Section.astro';
+import ReportSection from './ReportSection.astro';
 import { profile } from '../data/profile';
 import { es } from '../i18n/es';
 ---
 
-<Section
+<ReportSection
 	id="contacto"
-	eyebrow={es.contact.eyebrow}
+	index="07"
+	label={es.report.contact}
 	title={es.contact.title}
 	description={es.contact.description}
 >
@@ -70,4 +71,4 @@ import { es } from '../i18n/es';
 			</div>
 		</div>
 	</div>
-</Section>
+</ReportSection>
