@@ -21,13 +21,19 @@ bun-debug.log*
 # Local OpenCode configuration
 opencode.json
 
-# Agent memory
+# Agent memory & config
 .engram/
+skills-lock.json
+.agents/
 
 # Tests and reports
 playwright-report/
 test-results/
+lighthouse-report.html
 .lighthouseci/
+
+# CV local sin sanear: contiene datos confidenciales; no publicar
+assets/CV_ATS_2026_Carlos_Gutierrez.pdf
 
 # OS and editor files
 .DS_Store
