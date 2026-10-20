@@ -23,6 +23,16 @@ export const reportMetrics: readonly ReportMetric[] = [
   { value: '2', label: 'tipos de CRM', note: es.report.metricsNote },
 ];
 
+/**
+ * Frases aprobadas en `experience.ts` que se resaltan como métricas.
+ * Deben coincidir literalmente con el copy aprobado.
+ */
+export const experienceMetricPhrases: readonly string[] = [
+  'más de 50',
+  '100 y 500',
+  'dos tipos de CRM',
+];
+
 /** Siete capítulos del informe, en el orden de la página. */
 export const reportSections: readonly ReportSection[] = [
   { id: 'servicios', index: '01', label: es.report.services, href: '#servicios' },

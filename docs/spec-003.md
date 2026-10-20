@@ -353,7 +353,7 @@ Decisiones:
 
 - Registro tipo ledger, no tarjetas.
 - Agrupación por categoría: Fundamentos de ingeniería y Juegos y gráficos.
-- Cada fila: número `02.x`, título, tipo, año, stack y enlace al repositorio.
+- Cada fila: número `03.x` (coherente con el capítulo 03), título, tipo, año, stack y enlace al repositorio.
 - En móvil, cada fila se convierte en una ficha apilada con etiquetas visibles; sin tabla horizontal.
 - Nota de contexto: proyectos académicos y de exploración, no trabajos para clientes.
 
@@ -545,6 +545,7 @@ Contratos:
   3. `value: '2'`, `label: 'tipos de CRM'`.
 - `note` es exactamente: «Métricas de experiencia profesional, no de los proyectos listados».
 - No se añaden cifras, tendencias, porcentajes, periodos ni comparaciones.
+- `experienceMetricPhrases` contiene las frases aprobadas que se resaltan en los logros (`más de 50`, `100 y 500`, `dos tipos de CRM`); se usa para construir el patrón de énfasis sin duplicar el copy.
 - `reportSections` contiene exactamente siete capítulos con los `id` `servicios`, `proyectos`, `otros-proyectos`, `experiencia`, `stack`, `sobre-mi` y `contacto`.
 - `reportSections` alimenta los encabezados de capítulo y el índice del colofón; el header mantiene su propia lista clásica de cinco enlaces.
 - Ningún dato de `report.ts` puede contradecir `projects.ts`, `experience.ts` o `profile.ts`.
@@ -740,7 +741,7 @@ La implementación se entrega con estas reglas:
 
 ### 10.3 Decisiones de implementación
 
-- El ledger de otros proyectos usa numeración `03.x` para coincidir con el capítulo 03 visible; la referencia `02.x` de §4.5 se interpretó como formato de ejemplo y se resolvió a favor de la coherencia del índice.
+- El ledger de otros proyectos usa numeración `03.x`, coherente con el capítulo 03 visible y con §4.5.
 - `ProjectEntry` muestra `details` cuando existe un detalle aprobado (`disclosure`). No se inventan detalles para casos sin nota.
 - `reportMetrics` toma la nota de `es.report.metricsNote` para evitar duplicar la cadena exacta.
 - La aparición de secciones se activa solo con JavaScript (`data-js`) y se desactiva con `prefers-reduced-motion`; sin JS todo el contenido permanece visible.
