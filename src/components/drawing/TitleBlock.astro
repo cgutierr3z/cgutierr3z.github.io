@@ -1,0 +1,28 @@
+---
+import Annotation from './Annotation.astro';
+import { es } from '../../i18n/es';
+
+interface Props {
+	name: string;
+	role: string;
+	sheet?: string;
+}
+
+const { name, role, sheet = '00' } = Astro.props;
+---
+
+<div class="border border-rule bg-paper-raised p-5">
+	<div class="flex flex-wrap items-baseline justify-between gap-4">
+		<span
+			class="font-mono text-xs tracking-[0.16em] text-[color:var(--color-ink-soft)]"
+			aria-hidden="true"
+		>
+			{es.drawing.titleBlock}
+		</span>
+		<Annotation label={es.drawing.year} value={sheet?.toString() ?? ''} />
+	</div>
+	<div class="mt-6">
+		<h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{name}</h1>
+		<p class="mt-2 text-lg font-medium text-[color:var(--color-ink-soft)]">{role}</p>
+	</div>
+</div>

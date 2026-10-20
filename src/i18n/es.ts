@@ -1,9 +1,18 @@
 export const es = {
-  header: {
-    home: 'Inicio',
-    mainNav: 'Navegación principal',
-    mobileNav: 'Navegación móvil',
-  },
+	drawing: {
+		sheetIndex: 'Índice de láminas',
+		titleBlock: 'Bloque de títulos',
+		year: '2026',
+		scale: 'Escala',
+		loadPath: 'Trazado de cargas',
+		loadPathDescription:
+			'Corte vertical del stack: interfaz, servicios, datos y operación con cargas de experiencia.',
+	},
+	header: {
+		home: 'Inicio',
+		mainNav: 'Navegación principal',
+		mobileNav: 'Navegación móvil',
+	},
   nav: {
     services: 'Servicios',
     projects: 'Proyectos',
