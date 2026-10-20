@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { es } from '../i18n/es';
-import type { Project } from '../data/types';
+import type { Project, ProjectLink } from '../data/types';
 
 interface Props {
   project: Project;
@@ -9,6 +9,9 @@ interface Props {
 }
 
 const { project, compact = false } = Astro.props;
+
+const linkLabel = (link: ProjectLink): string =>
+	link.label?.trim() || (link.type === 'demo' ? 'Demo' : 'Repositorio');
 ---
 
 <article
@@ -68,10 +71,10 @@ const { project, compact = false } = Astro.props;
 					href={link.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					aria-label={`${link.label} de ${project.title}. ${es.a11y.externalLink}`}
+					aria-label={`${linkLabel(link)} de ${project.title}. ${es.a11y.externalLink}`}
 					class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-accent)] transition-colors hover:text-[var(--color-accent-hover)]"
 				>
-					{link.label}
+					{linkLabel(link)}
 					<Icon name="external" class="h-3.5 w-3.5" />
 				</a>
 			))

@@ -5,11 +5,13 @@ import { fileURLToPath } from 'node:url';
 
 import { profile } from '../src/data/profile';
 import { experience } from '../src/data/experience';
-import { technologies } from '../src/data/technologies';
 import { featuredProjects } from '../src/data/projects';
 import {
   cvAdditionalExperience,
+  cvCurrentRoleBullets,
   cvEducation,
+  cvProjectSummaries,
+  cvSkillGroups,
   cvSummary,
 } from '../src/data/cv';
 import type { Experience } from '../src/data/types';
@@ -72,17 +74,8 @@ if (!current) {
   throw new Error('No hay experiencia principal para generar el CV.');
 }
 
-const currentBullets = [
-  [current.achievements[0], current.achievements[1]].filter(Boolean).join(' '),
-  current.responsibilities[4],
-  current.responsibilities[3],
-  current.achievements[2],
-  current.responsibilities[5],
-  current.responsibilities[6],
-].filter((bullet): bullet is string => Boolean(bullet));
-
 const jobs: Array<Experience & { bullets: string[] }> = [
-  { ...current, bullets: currentBullets },
+  { ...current, bullets: cvCurrentRoleBullets },
   ...cvAdditionalExperience.map((job) => ({
     ...job,
     bullets: job.responsibilities.length > 0 ? job.responsibilities : [job.summary],
@@ -105,7 +98,7 @@ const renderJob = (job: Experience & { bullets: string[] }): string => `
         </ul>
       </div>`;
 
-const skills = technologies
+const skills = cvSkillGroups
   .map(
     (group) =>
       `<strong>${escapeHtml(group.category)}:</strong> ${group.items
@@ -115,13 +108,13 @@ const skills = technologies
   .join('\n        <br />\n        ');
 
 const projects = featuredProjects
-  .map(
-    (project) => `
+  .map((project) => {
+    const summary = cvProjectSummaries[project.slug] ?? project.summary;
+    return `
         <p class="project">
-          <strong>${escapeHtml(project.title)}</strong> — ${escapeHtml(project.summary)}
-          <span class="muted">${project.stack.map(escapeHtml).join(', ')}.</span>
-        </p>`,
-  )
+          <strong>${escapeHtml(project.title)}</strong> — ${escapeHtml(summary)}
+        </p>`;
+  })
   .join('');
 
 const contact = [

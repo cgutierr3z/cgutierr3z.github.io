@@ -75,7 +75,7 @@ El sitio permanece publicado durante la implementación. El nuevo despliegue sol
 | CV | HTTP 200, `application/pdf` |
 | 404 | HTTP 404 con `noindex, nofollow` |
 | Sitemap, robots y OG | HTTP 200 |
-| Playwright + axe | 12/12; 0 violaciones críticas/serias |
+| Playwright + axe | 12/12 al inicio; 19/19 tras SPEC-002; 0 violaciones |
 | Lighthouse móvil | 100 / 100 / 100 / 100 |
 | Responsive | Sin scroll horizontal de 360 a 1440 px |
 | Confidencialidad | Limpia en árbol, historial de `master`, `dist/`, PDF y metadatos |
@@ -422,13 +422,15 @@ Ajustar `tests/a11y.spec.ts`:
 | T-004 | Completada | `dist/404.html` sin canonical, `og:url` ni JSON-LD; la home conserva las tres señales. Cubierto por `tests/portfolio.spec.ts`. |
 | T-005 | Completada | `pdfinfo`: `Tagged: yes`, `Pages: 1`, `Page size: 612 x 792 pts (letter)`; `pdfimages -list` sin imágenes; texto sin datos sensibles. |
 | T-006 | Completada | Contacto y footer anuncian “Abre en una nueva pestaña”; los cuatro enlaces de proyectos incluyen el nombre del proyecto; tests en verde. |
-| T-007 | Completada | Nuevo `scripts/generate-cv.ts`; datos exclusivos en `src/data/cv.ts`; experiencia, stack y proyectos importados desde `src/data`; `scripts/generate-cv.mjs` retirado; script `cv:generate` con Bun. |
+| T-007 | Completada | Nuevo `scripts/generate-cv.ts`; `src/data/cv.ts` conserva el copy aprobado del CV (bullets, habilidades y resúmenes de proyectos); experiencia, fechas y títulos se importan desde `src/data`; `scripts/generate-cv.mjs` retirado; script `cv:generate` con Bun. |
 | T-008 | Completada | Textos de menú, tema y contacto centralizados en `src/i18n/es.ts`; `Header` y `ThemeToggle` usan atributos `data-*` para sus etiquetas dinámicas. |
-| T-009 | Completada | `bunx playwright test --reporter=line`: 18/18. Incluye CV obligatorio, SEO de 404, enlaces accesibles, proyectos y workflows. |
+| T-009 | Completada | `bunx playwright test --reporter=line`: 19/19. Incluye verificación del PDF (texto, etiquetado, una página), CV obligatorio, SEO de 404, enlaces accesibles, proyectos y workflows. |
 | T-010 | Completada | SPEC-001 actualizada; búsqueda de la métrica retirada limpia; ejecución de `code-reviewer` y hallazgos documentados. |
-| T-011 | Completada | `astro check`: 0 errores; build correcto; Lighthouse local: 100/100/100/100; PDF etiquetado de una página. |
+| T-011 | Completada | `astro check`: 0 errores; build correcto; Lighthouse local: 100/100/100/100; `pdfinfo`: `Tagged: yes`, 1 página, Letter; sin imágenes ni datos sensibles. |
 | T-012 | Pendiente | Abrir PR, validar CI, mergear y desplegar en GitHub Pages. |
 | T-013 | Pendiente | Validar el sitio live y cerrar SPEC-002/SPEC-001. |
+
+La revisión de implementación detectó dos brechas medias: faltaba una comprobación automática del contenido del PDF y la migración del generador había cambiado el copy aprobado del CV. Ambas se cerraron antes del merge: `tests/cv.spec.ts` verifica el texto y los metadatos del PDF, y `src/data/cv.ts` conserva el copy aprobado. También se corrigieron el fallback de etiquetas de proyectos, la validación de permisos globales y la separación del anuncio de nueva pestaña en el Hero.
 
 ---
 
@@ -454,37 +456,37 @@ Ajustar `tests/a11y.spec.ts`:
 
 ### 9.1 Automáticos
 
-- [ ] `bun install --frozen-lockfile` sin cambios inesperados.
-- [ ] `bun run check` con 0 errores.
-- [ ] `bun run build` genera `dist/` correctamente.
-- [ ] Playwright + axe pasan.
-- [ ] El test de CV exige el enlace y el PDF.
-- [ ] El test de la 404 verifica ausencia de canonical/og:url/JSON-LD.
-- [ ] El test de workflows verifica SHA y permisos.
-- [ ] Lighthouse móvil ≥ 95 en Rendimiento, Accesibilidad, Buenas Prácticas y SEO.
-- [ ] `pdfinfo` reporta `Tagged: yes`, una página y tamaño Letter.
-- [ ] No hay scroll horizontal de 360 a 1440 px.
+- [x] `bun install --frozen-lockfile` sin cambios inesperados.
+- [x] `bun run check` con 0 errores.
+- [x] `bun run build` genera `dist/` correctamente.
+- [x] Playwright + axe pasan (19/19).
+- [x] El test de CV exige el enlace, el PDF y su contenido aprobado.
+- [x] El test de la 404 verifica ausencia de canonical/og:url/JSON-LD.
+- [x] El test de workflows verifica SHA y permisos.
+- [x] Lighthouse móvil ≥ 95 en Rendimiento, Accesibilidad, Buenas Prácticas y SEO (100/100/100/100).
+- [x] `pdfinfo` reporta `Tagged: yes`, una página y tamaño Letter.
+- [x] No hay scroll horizontal de 360 a 1440 px (360, 768, 1024 y 1440).
 
 ### 9.2 Manuales
 
-- [ ] El CV se ve correctamente en una página.
-- [ ] El PDF no contiene empleador, teléfono, dirección, foto ni ubicación.
-- [ ] Los enlaces de Contacto y Footer anuncian la nueva pestaña.
-- [ ] Los enlaces de proyectos incluyen el nombre del proyecto.
-- [ ] El tema claro/oscuro persiste.
-- [ ] El menú móvil abre, cierra con Escape y devuelve el foco.
+- [x] El CV se ve correctamente en una página.
+- [x] El PDF no contiene empleador, teléfono, dirección, foto ni ubicación.
+- [x] Los enlaces de Hero, Contacto y Footer anuncian la nueva pestaña.
+- [x] Los enlaces de proyectos incluyen el nombre del proyecto.
+- [x] El tema claro/oscuro persiste.
+- [x] El menú móvil abre, cierra con Escape y devuelve el foco.
 - [ ] La 404 live responde 404 y conserva `noindex`.
 - [ ] El workflow de deploy está en verde.
-- [ ] No hay datos confidenciales en árbol, historial, `dist/` ni PDF.
-- [ ] No se modificaron las métricas aprobadas.
+- [x] No hay datos confidenciales en árbol, historial, `dist/` ni PDF.
+- [x] No se modificaron las métricas aprobadas.
 
 ### 9.3 Documentación
 
-- [ ] `docs/spec-002.md` actualizado con el registro de tareas.
-- [ ] `docs/spec-001.md` sin la métrica de endpoints retirada.
-- [ ] `docs/spec-001.md` refleja que `code-reviewer` se ejecutó y no reportó bloqueantes.
+- [x] `docs/spec-002.md` actualizado con el registro de tareas.
+- [x] `docs/spec-001.md` sin la métrica de endpoints retirada.
+- [x] `docs/spec-001.md` refleja que `code-reviewer` se ejecutó y no reportó bloqueantes.
 - [ ] `README.md` documenta el CI de PR y el estado del deploy.
-- [ ] Checklist de contenido y checklist global sin contradicciones.
+- [x] Checklist de contenido y checklist global sin contradicciones.
 
 ---
 
@@ -601,8 +603,10 @@ curl -sS -o /dev/null -w '%{http_code}\n' \
 | `src/components/ThemeToggle.astro` | Textos i18n y atributos `data-*` |
 | `src/i18n/es.ts` | Nuevas claves de tema, menú, navegación y contacto |
 | `tests/portfolio.spec.ts` | CV obligatorio, 404 SEO y enlaces |
+| `tests/cv.spec.ts` | Contenido, etiquetado y paginación del PDF |
 | `tests/a11y.spec.ts` | Umbral y revisión de moderadas |
 | `tests/workflow.spec.ts` | Invariantes de SHA y permisos |
+| `.github/workflows/ci.yml` / `deploy.yml` | Instalación de `poppler-utils` para verificar el PDF |
 | `docs/spec-001.md` | Limpieza de métrica retirada y checklist |
 | `README.md` | CI de PR y estado del deploy |
 | `docs/spec-002.md` | Registro de ejecución y cierre |

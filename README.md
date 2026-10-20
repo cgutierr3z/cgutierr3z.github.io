@@ -19,6 +19,7 @@ Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Presenta servi
 
 - Bun 1.4 o superior
 - Node.js 22.22 o superior (requisito de Astro)
+- `poppler-utils` (`pdfinfo`, `pdftotext`) para la verificación automatizada del CV
 
 ## Desarrollo
 
@@ -46,6 +47,7 @@ El servidor de desarrollo estará disponible en `http://localhost:4321`.
 ### Tests
 
 ```bash
+# Debian/Ubuntu: sudo apt-get install poppler-utils
 bunx playwright install chromium
 bun run build
 bun run test:e2e
@@ -87,7 +89,7 @@ Despliegue validado:
 
 - Workflow `Deploy to GitHub Pages`: run `39369166799`, jobs `build` y `deploy` en verde.
 - Home, CV, 404, sitemap, robots y OG image responden correctamente.
-- Smoke live: 8 secciones, tema persistente, menú móvil accesible, 0 errores de consola y 0 violaciones axe críticas/serias.
+- Smoke live: 8 secciones, tema persistente, menú móvil accesible, 0 errores de consola y 0 violaciones axe.
 
 ## Confidencialidad
 

@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { featuredProjects } from '../src/data/projects';
 
 test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
   test('la home carga con h1 correcto, nombre y rol', async ({ page }) => {
@@ -123,6 +124,14 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
   test('los enlaces externos anuncian la nueva pestaña', async ({ page }) => {
     await page.goto('/');
 
+    const hero = page.locator('#inicio');
+    await expect(
+      hero.getByRole('link', { name: /GitHub/ }),
+    ).toHaveAccessibleName(/Abre en una nueva pestaña/);
+    await expect(
+      hero.getByRole('link', { name: /LinkedIn/ }),
+    ).toHaveAccessibleName(/Abre en una nueva pestaña/);
+
     const contact = page.locator('#contacto');
     await expect(
       contact.getByRole('link', { name: /GitHub/ }),
@@ -147,7 +156,11 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     await page.goto('/');
 
     const projectLinks = page.locator('section#proyectos a[target="_blank"]');
-    await expect(projectLinks).toHaveCount(4);
+    const expectedLinks = featuredProjects.reduce(
+      (total, project) => total + project.links.length,
+      0,
+    );
+    await expect(projectLinks).toHaveCount(expectedLinks);
 
     const labels = await projectLinks.evaluateAll((links) =>
       links.map((link) => link.getAttribute('aria-label') ?? ''),
@@ -190,7 +203,7 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
   });
 
   test('no hay scroll horizontal de 360px a 1440px', async ({ page }) => {
-    for (const width of [360, 1440]) {
+    for (const width of [360, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto('/');
 
