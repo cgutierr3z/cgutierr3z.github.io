@@ -1,9 +1,16 @@
 ---
-import Icon from './Icon.astro';
 import ReportSection from './ReportSection.astro';
 import { experience } from '../data/experience';
 import { es } from '../i18n/es';
 import { formatMonth } from '../utils/format';
+
+const metricPattern = /(más de 50|100 y 500|dos tipos de CRM)/;
+
+const achievementSegments = (text: string) =>
+	text
+		.split(metricPattern)
+		.filter(Boolean)
+		.map((part) => ({ text: part, isMetric: metricPattern.test(part) }));
 ---
 
 <ReportSection
@@ -13,87 +20,96 @@ import { formatMonth } from '../utils/format';
 	title={es.sections.experience}
 	description="Experiencia en aplicaciones empresariales, migraciones de formularios, APIs y procesos de datos."
 >
-	<div class="space-y-6">
+	<ol class="border-l border-rule-strong">
 		{
 			experience.map((job) => (
-				<article class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8">
-					<div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+				<li class="relative pl-6 md:pl-10">
+					<span
+						aria-hidden="true"
+						class="absolute -left-[3px] top-2 h-1.5 w-1.5 bg-oxide"
+					/>
+
+					<div class="md:grid md:grid-cols-[10rem_minmax(0,1fr)] md:gap-10">
 						<div>
-							<div class="flex flex-wrap items-center gap-2">
-								<h3 class="text-xl font-semibold">{job.role}</h3>
-								{job.companyConfidential && (
-									<span class="inline-flex items-center gap-1 rounded-full border border-[var(--color-border)] bg-[var(--color-bg)] px-2.5 py-1 text-xs font-medium text-[var(--color-muted)]">
-										<Icon name="lock" class="h-3.5 w-3.5" />
-										{es.labels.confidential}
-									</span>
+							<p class="data text-ink-soft">
+								<time datetime={job.start}>{formatMonth(job.start)}</time>
+								{' — '}
+								{job.end ? (
+									<time datetime={job.end}>{formatMonth(job.end)}</time>
+								) : (
+									'Actualidad'
 								)}
-							</div>
-							<p class="mt-1 text-sm text-[var(--color-muted)]">{job.company}</p>
+							</p>
 						</div>
-						<p class="text-sm font-medium text-[var(--color-muted)]">
-							<time datetime={job.start}>{formatMonth(job.start)}</time>
-							{' — '}
-							{job.end ? (
-								<time datetime={job.end}>{formatMonth(job.end)}</time>
-							) : (
-								'Actualidad'
+
+						<div class="mt-3 md:mt-0">
+							<h3 class="text-2xl sm:text-3xl">{job.role}</h3>
+							<p class="mt-2 text-ink-soft">{job.company}</p>
+
+							<p class="prose-measure mt-5 text-ink-soft">{job.summary}</p>
+
+							<div class="mt-8">
+								<h4 class="data text-oxide">{es.labels.achievements}</h4>
+								<ul class="mt-3 space-y-2">
+									{job.achievements.map((achievement) => (
+										<li class="grid grid-cols-[1rem_minmax(0,1fr)] gap-2">
+											<span
+												aria-hidden="true"
+												class="mt-2.5 h-1 w-1 bg-rule-strong"
+											/>
+											<span class="prose-measure">
+												{achievementSegments(achievement).map((segment) =>
+													segment.isMetric ? (
+														<strong class="font-semibold text-ink">
+															{segment.text}
+														</strong>
+													) : (
+														segment.text
+													),
+												)}
+											</span>
+										</li>
+									))}
+								</ul>
+							</div>
+
+							<details class="mt-6 border-t border-rule pt-4">
+								<summary class="cursor-pointer text-sm font-semibold text-ink marker:text-oxide">
+									{es.labels.responsibilities}
+								</summary>
+								<ul class="mt-4 space-y-2 text-sm leading-relaxed text-ink-soft">
+									{job.responsibilities.map((responsibility) => (
+										<li class="grid grid-cols-[1rem_minmax(0,1fr)] gap-2">
+											<span
+												aria-hidden="true"
+												class="mt-2.5 h-1 w-1 bg-rule-strong"
+											/>
+											<span class="prose-measure">{responsibility}</span>
+										</li>
+									))}
+								</ul>
+							</details>
+
+							<div class="mt-6">
+								<p class="data text-ink-soft">{es.labels.stack}</p>
+								<ul class="mt-2 flex flex-wrap gap-x-2 gap-y-1">
+									{job.stack.map((technology) => (
+										<li class="border border-rule px-2 py-0.5 text-xs">
+											{technology}
+										</li>
+									))}
+								</ul>
+							</div>
+
+							{job.companyConfidential && (
+								<p class="mt-5 border-t border-rule pt-3 text-xs text-ink-soft">
+									{es.labels.confidentialNote}
+								</p>
 							)}
-						</p>
+						</div>
 					</div>
-
-					<p class="mt-5 max-w-4xl text-sm leading-relaxed text-[var(--color-muted)]">
-						{job.summary}
-					</p>
-
-					<div class="mt-6">
-						<h4 class="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)]">
-							{es.labels.achievements}
-						</h4>
-						<ul class="mt-3 grid gap-2 sm:grid-cols-2">
-							{job.achievements.map((achievement) => (
-								<li class="flex items-start gap-2 text-sm leading-relaxed">
-									<Icon
-										name="check"
-										class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]"
-									/>
-									{achievement}
-								</li>
-							))}
-						</ul>
-					</div>
-
-					<details class="mt-6 border-t border-[var(--color-border)] pt-4">
-						<summary class="cursor-pointer text-sm font-semibold">
-							{es.labels.responsibilities}
-						</summary>
-						<ul class="mt-3 space-y-2 text-sm leading-relaxed text-[var(--color-muted)]">
-							{job.responsibilities.map((responsibility) => (
-								<li class="flex items-start gap-2">
-									<span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--color-accent)]" />
-									{responsibility}
-								</li>
-							))}
-						</ul>
-					</details>
-
-					<ul
-						class="mt-6 flex flex-wrap gap-2"
-						aria-label={es.labels.technologies}
-					>
-						{job.stack.map((technology) => (
-							<li class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-2 py-1 text-xs text-[var(--color-muted)]">
-								{technology}
-							</li>
-						))}
-					</ul>
-
-					{job.companyConfidential && (
-						<p class="mt-4 text-xs text-[var(--color-muted)]">
-							{es.labels.confidentialNote}
-						</p>
-					)}
-				</article>
+				</li>
 			))
 		}
-	</div>
+	</ol>
 </ReportSection>
