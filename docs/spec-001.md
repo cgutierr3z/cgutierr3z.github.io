@@ -224,7 +224,7 @@ El sitio debe equilibrar **empleo** y **clientes**. El CTA principal será el co
 - Desarrollo, mantenimiento y soporte de aplicaciones empresariales con PHP, JavaScript y herramientas web.
 - Migración de formularios y funcionalidades desde PHP con Yii 1 hacia soluciones basadas en React y Form.io.
 - Desarrollo de servicios y procesos de integración de datos con Node.js y Express.
-- Consumo e integración de APIs REST y desarrollo de aproximadamente cinco endpoints en AWS Lambda.
+- Consumo e integración de APIs REST con servicios en AWS Lambda.
 - Migración de datos desde DB2 on-premise hacia PostgreSQL en la nube, utilizando CSV, APIs y generación de logs.
 - Gestión de requerimientos e incidentes P1 y P2, incluyendo guardias mensuales.
 - Creación y manejo de imágenes y contenedores Docker; participación en pipelines y despliegues.
@@ -235,7 +235,6 @@ El sitio debe equilibrar **empleo** y **clientes**. El CTA principal será el co
 - Participación en la migración de formularios de más de 50 aplicaciones empresariales.
 - Trabajo con dos tipos de CRM: aplicaciones internas y orientadas a clientes.
 - Soporte y mantenimiento de soluciones utilizadas por entre 100 y 500 usuarios por instancia de producción.
-- Desarrollo de aproximadamente cinco endpoints en AWS Lambda para integraciones y procesamiento de información.
 - Participación en procesos de migración de datos entre infraestructura local y bases de datos en la nube.
 
 **Stack:**
