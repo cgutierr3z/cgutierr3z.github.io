@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | **ID** | SPEC-003 |
-| **Versión** | 2.0 — Dirección aprobada; pendiente de implementación |
+| **Versión** | 2.1 — Implementada y validada |
 | **Fecha** | 2026-10-20 |
-| **Estado** | Aprobada por el propietario; implementación reiniciada |
+| **Estado** | Implementada y validada en `feat/spec-003-report`; pendiente de revisión y merge |
 | **Repositorio** | https://github.com/cgutierr3z/cgutierr3z.github.io |
 | **Sitio objetivo** | https://cgutierr3z.github.io/ |
 | **Base** | `master` @ `6b7172b` |
@@ -28,6 +28,7 @@
 |---|---|---|
 | 1.0 | 2026-10-20 | Dirección «Trazado de cargas». Se implementaron T-001–T-003 (tokens, shell de láminas, portada con corte de cargas). El propietario rechazó la estética de láminas/planos; solo aprobó el esquema de colores y exigió recuperar el menú horizontal clásico. |
 | 2.0 | 2026-10-20 | Dirección «Informe de gestión». Se conserva la paleta y el menú clásico; se descarta toda la metáfora de planos, láminas, bloques de títulos y anotaciones. Se reinicia el plan de implementación. |
+| 2.1 | 2026-10-20 | Implementación completada (T-001–T-010) y validada en `feat/spec-003-report`: check, build, 36 pruebas Playwright/axe, Lighthouse 100/100/100/100 y detector sin hallazgos. |
 
 La versión 1.0 queda como evidencia en el historial de git y en la rama antigua; no debe reutilizarse su lenguaje visual ni sus componentes.
 
@@ -664,16 +665,16 @@ Revisión:
 
 ### 7.4 Criterios de aceptación final
 
-- [ ] SC-001 a SC-018 verificados.
-- [ ] `bun run check` sin errores.
-- [ ] `bun run build` correcto.
-- [ ] Suite Playwright/axe completa en verde.
-- [ ] Lighthouse móvil ≥ 95 en las cuatro categorías.
-- [ ] Capturas de QA visual revisadas y aprobadas.
-- [ ] Contenido, métricas y confidencialidad auditados.
-- [ ] `DESIGN.md` y `README.md` actualizados.
-- [ ] `docs/spec-003.md` marcado como implementado y validado.
-- [ ] PR con CI en verde y revisión `code-reviewer` APTO.
+- [x] SC-001 a SC-018 verificados.
+- [x] `bun run check` sin errores.
+- [x] `bun run build` correcto.
+- [x] Suite Playwright/axe completa en verde (36/36).
+- [x] Lighthouse móvil ≥ 95 en las cuatro categorías (100/100/100/100).
+- [x] Capturas de QA visual revisadas: 1440 × 900, 1024 × 768, 768 × 1024, 390 × 844, 320 × 720, 404 y tema oscuro.
+- [x] Contenido, métricas y confidencialidad auditados.
+- [x] `DESIGN.md` y `README.md` actualizados.
+- [x] `docs/spec-003.md` marcado como implementado y validado.
+- [ ] PR con CI en verde y revisión `code-reviewer` APTO. *(No se abre PR por indicación del propietario; queda para su revisión.)*
 
 ---
 
@@ -706,3 +707,46 @@ La implementación se entrega con estas reglas:
 8. Al cierre: escribir `DESIGN.md` desde el sistema construido, actualizar `README.md`, marcar esta SPEC como implementada y entregar el resumen de validación.
 9. No copiar el contrato de dirección a código, HTML, atributos, metadatos ni artefactos servidos.
 10. Si una decisión de contenido no está en `src/data/`, detenerse y documentar la pregunta; no inventarla.
+
+---
+
+## 10. Registro de implementación
+
+### 10.1 Entrega
+
+| Campo | Valor |
+|---|---|
+| Rama | `feat/spec-003-report` (sin PR; revisión del propietario) |
+| Tareas | T-001 a T-010 completadas en orden |
+| Commits | Un commit convencional por tarea (`feat(T-00N): …`) |
+| Archivos clave | `src/styles/global.css`, `src/components/*`, `src/data/report.ts`, `src/i18n/es.ts`, `tests/*`, `DESIGN.md`, `README.md` |
+| Fuera de alcance | Sin cambios en `opencode.json`, `.github/workflows/*.yml`, `public/cv/`, `docs/spec-001.md` ni `docs/spec-002.md` |
+
+### 10.2 Validación
+
+| Verificación | Resultado |
+|---|---|
+| `bun run check` | 0 errores, 0 advertencias, 0 avisos |
+| `bun run build` | 2 páginas estáticas (`/` y `/404.html`) |
+| `bun run test:e2e` | 36/36 en verde |
+| axe (home y 404, claro y oscuro) | 0 violaciones |
+| Lighthouse móvil | 100 rendimiento / 100 accesibilidad / 100 buenas prácticas / 100 SEO |
+| LCP / CLS / TBT | 1,7 s / 0 / 0 ms |
+| Fuentes WOFF2 | 116 KB en total |
+| `impeccable detect` | Sin hallazgos (`[]`) |
+| Scroll horizontal | Ninguno de 320 a 1440 px |
+| Sin JavaScript | Contenido, cifras y contacto visibles |
+| Impresión | 8 páginas A4 legibles, navegación oculta y campos de color resueltos en blanco y negro |
+
+### 10.3 Decisiones de implementación
+
+- El ledger de otros proyectos usa numeración `03.x` para coincidir con el capítulo 03 visible; la referencia `02.x` de §4.5 se interpretó como formato de ejemplo y se resolvió a favor de la coherencia del índice.
+- `ProjectEntry` muestra `details` cuando existe un detalle aprobado (`disclosure`). No se inventan detalles para casos sin nota.
+- `reportMetrics` toma la nota de `es.report.metricsNote` para evitar duplicar la cadena exacta.
+- La aparición de secciones se activa solo con JavaScript (`data-js`) y se desactiva con `prefers-reduced-motion`; sin JS todo el contenido permanece visible.
+- La portada social y el favicon son tipográficos y vectoriales, sin imágenes de proyectos ni datos sensibles. La OG se regenera con `bun run og:generate`.
+
+### 10.4 Pendiente
+
+- Revisión del propietario, apertura de PR si la desea y despliegue a `master`.
+

@@ -17,6 +17,7 @@
     "test:a11y": "playwright test tests/a11y.spec.ts",
     "test:lighthouse": "lighthouse http://127.0.0.1:4321 --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless=new\" --only-categories=performance,accessibility,best-practices,seo",
     "cv:generate": "bun scripts/generate-cv.ts",
+    "og:generate": "bun scripts/generate-og.ts",
     "astro": "astro"
   },
   "dependencies": {

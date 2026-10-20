@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { featuredProjects } from '../src/data/projects';
+import { featuredProjects, otherProjects } from '../src/data/projects';
 
 test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
   test('la home carga con h1 correcto, nombre y rol', async ({ page }) => {
@@ -46,6 +46,15 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
       '#stack',
       '#sobre-mi',
     ]);
+
+    const labels = await navLinks.allTextContents();
+    expect(labels.map((label) => label.trim())).toEqual([
+      'Servicios',
+      'Proyectos',
+      'Experiencia',
+      'Stack',
+      'Sobre mí',
+    ]);
   });
 
   test('el menu movil abre, cierra con Escape y devuelve el foco al boton', async ({ page }) => {
@@ -76,15 +85,12 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     const root = page.locator('html');
     const toggle = page.locator('#theme-toggle');
 
-    // Inicial en claro
     await expect(root).toHaveAttribute('data-theme', 'light');
 
-    // Cambiar a oscuro
     await toggle.click();
     await expect(root).toHaveAttribute('data-theme', 'dark');
     await expect(toggle).toHaveAttribute('aria-pressed', 'true');
 
-    // Recargar y verificar persistencia
     await page.reload();
     await expect(root).toHaveAttribute('data-theme', 'dark');
     await expect(toggle).toHaveAttribute('aria-pressed', 'true');
@@ -171,6 +177,90 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     }
   });
 
+  test('los tres casos destacados tienen ancla estable', async ({ page }) => {
+    await page.goto('/');
+
+    for (const project of featuredProjects) {
+      const entry = page.locator(`#proyecto-${project.slug}`);
+      await expect(entry).toHaveCount(1);
+      await expect(entry).toHaveAttribute('aria-labelledby', `${project.slug}-title`);
+      await expect(page.locator(`#${project.slug}-title`)).toHaveText(project.title);
+    }
+  });
+
+  test('el registro contiene los cinco proyectos secundarios', async ({ page }) => {
+    await page.goto('/');
+
+    const ledger = page.locator('#otros-proyectos');
+    await expect(ledger.locator('li')).toHaveCount(otherProjects.length);
+
+    for (const project of otherProjects) {
+      await expect(ledger).toContainText(project.title);
+    }
+  });
+
+  test('la portada muestra las cifras aprobadas y su nota exacta', async ({ page }) => {
+    await page.goto('/');
+
+    const band = page.locator('#inicio .field-patina');
+    await expect(band).toBeVisible();
+    await expect(band).toContainText('+50');
+    await expect(band).toContainText('aplicaciones');
+    await expect(band).toContainText('100–500');
+    await expect(band).toContainText('usuarios');
+    await expect(band).toContainText('tipos de CRM');
+    await expect(band).toContainText(
+      'Métricas de experiencia profesional, no de los proyectos listados.',
+    );
+
+    const text = await band.innerText();
+    expect(text).not.toMatch(/%|↑|↓|vs\.?/i);
+  });
+
+  test('el primer viewport de escritorio muestra el trabajo y la accion primaria', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+
+    await expect(page.locator('#hero-title')).toContainText('Carlos Gutierrez');
+    await expect(page.locator('#hero-title')).toContainText('Desarrollador Full Stack');
+
+    const projectLinks = page.locator('#inicio a[href^="#proyecto-"]');
+    await expect(projectLinks).toHaveCount(3);
+
+    for (let i = 0; i < 3; i++) {
+      const box = await projectLinks.nth(i).boundingBox();
+      expect(box, `enlace ${i + 1} sin caja`).not.toBeNull();
+      expect(box!.y).toBeLessThan(900);
+    }
+
+    const primary = page.locator('#inicio').getByRole('link', { name: 'Ver proyectos' });
+    await expect(primary).toBeVisible();
+    const primaryBox = await primary.boundingBox();
+    expect(primaryBox!.y).toBeLessThan(900);
+
+    const bandBox = await page.locator('#inicio .field-patina').boundingBox();
+    expect(bandBox!.y).toBeLessThan(900);
+  });
+
+  test('el primer viewport movil muestra nombre, rol, CTA e inicio de cifras', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+
+    await expect(page.locator('#hero-title')).toContainText('Carlos Gutierrez');
+    await expect(page.locator('#hero-title')).toContainText('Desarrollador Full Stack');
+    await expect(
+      page.locator('#inicio').getByRole('link', { name: 'Ver proyectos' }),
+    ).toBeVisible();
+
+    const bandBox = await page.locator('#inicio .field-patina').boundingBox();
+    expect(bandBox!.y).toBeLessThan(844);
+
+    const hasHorizontalScroll = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    );
+    expect(hasHorizontalScroll).toBe(false);
+  });
+
   test('la pagina 404 carga, tiene titulo descriptivo y enlaza a home', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (err) => errors.push(err.message));
@@ -202,8 +292,8 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
   });
 
-  test('no hay scroll horizontal de 360px a 1440px', async ({ page }) => {
-    for (const width of [360, 768, 1024, 1440]) {
+  test('no hay scroll horizontal de 320px a 1440px', async ({ page }) => {
+    for (const width of [320, 360, 390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto('/');
 
@@ -234,5 +324,19 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
       .analyze();
 
     expect(results.violations).toEqual([]);
+  });
+});
+
+test.describe('sin JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  test('el contenido principal sigue visible y navegable', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.locator('#hero-title')).toContainText('Carlos Gutierrez');
+    await expect(page.locator('#inicio .field-patina')).toContainText('+50');
+    await expect(page.locator('#experiencia')).toContainText('Empresa confidencial');
+    await expect(page.locator('#contacto')).toBeVisible();
+    await expect(page.locator('#contacto a[href^="mailto:"]')).toBeVisible();
   });
 });

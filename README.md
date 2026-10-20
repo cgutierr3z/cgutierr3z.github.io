@@ -1,17 +1,19 @@
 # Portafolio profesional — Carlos Gutierrez
 
-Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Presenta servicios, experiencia, tecnologías y proyectos reales para oportunidades laborales y clientes.
+Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Se lee como un **informe de gestión**: portada, cifras del periodo, trabajo seleccionado, registro adicional, trayectoria, capacidades, nota del autor y correspondencia. Presenta servicios, experiencia, tecnologías y proyectos reales para oportunidades laborales y clientes.
 
 - **Sitio:** https://cgutierr3z.github.io/
+- **Dirección visual:** «Informe de gestión» — [`DESIGN.md`](DESIGN.md)
 - **Especificación:** [`docs/spec-001.md`](docs/spec-001.md)
 - **Endurecimiento:** [`docs/spec-002.md`](docs/spec-002.md)
-- **Estado:** MVP desplegado; SPEC-002 implementada y validada en GitHub Pages
+- **Rediseño:** [`docs/spec-003.md`](docs/spec-003.md)
+- **Estado:** SPEC-003 implementada y validada localmente; pendiente de revisión y merge a `master`
 
 ## Stack
 
 - [Astro](https://astro.build/) con salida estática
 - TypeScript en modo strict
-- Tailwind CSS 4
+- Tailwind CSS 4 con tokens semánticos
 - Bun como gestor de paquetes
 - GitHub Actions + GitHub Pages
 
@@ -38,11 +40,12 @@ El servidor de desarrollo estará disponible en `http://localhost:4321`.
 | `bun run build` | Build estático en `dist/` |
 | `bun run preview` | Previsualización del build |
 | `bun run check` | Validación de Astro y TypeScript |
-| `bun run test:e2e` | Playwright (E2E + axe) |
+| `bun run test:e2e` | Playwright (E2E, axe, diseño y responsive) |
 | `bun run test:e2e:headed` | Playwright con navegador visible |
-| `bun run test:a11y` | Auditoría axe en home y 404 |
+| `bun run test:a11y` | Auditoría axe en home y 404, tema claro y oscuro |
 | `bun run test:lighthouse` | Lighthouse local contra `http://127.0.0.1:4321` |
 | `bun run cv:generate` | Regenera el CV público en `public/cv/` |
+| `bun run og:generate` | Regenera la portada social `public/og-image.png` |
 
 ### Tests
 
@@ -60,6 +63,8 @@ bun run preview --host 127.0.0.1 --port 4321
 CHROME_PATH=/ruta/a/chrome bun run test:lighthouse
 ```
 
+La suite cubre contenido y métricas aprobadas, navegación y menú móvil, tema persistente, CV descargable, SEO de home y 404, ausencia de la dirección visual anterior, movimiento reducido, contenido sin JavaScript y ausencia de scroll horizontal de 320 a 1440 px.
+
 ## Contenido
 
 El contenido se centraliza en `src/data/` para poder actualizarlo sin modificar los componentes:
@@ -69,10 +74,15 @@ El contenido se centraliza en `src/data/` para poder actualizarlo sin modificar 
 - `projects.ts`: proyectos y enlaces.
 - `experience.ts`: experiencia laboral.
 - `technologies.ts`: stack agrupado.
+- `report.ts`: métricas aprobadas, capítulos y etiquetas del informe.
 
 El CV público se genera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`.
 
-Las cadenas principales de interfaz se encuentran en `src/i18n/es.ts`; parte del copy de secciones vive en los componentes. El MVP está en español y la estructura permite extraer el resto al añadir inglés.
+Las cadenas de interfaz se encuentran en `src/i18n/es.ts`. El sitio está en español y la estructura permite extraer el resto al añadir inglés.
+
+## Sistema visual
+
+La dirección «Informe de gestión» usa papel cálido, tinta, óxido y pátina, con Archivo Variable y Fragment Mono self-hosted, tema claro/oscuro, menú horizontal clásico y movimiento sobrio. El sistema completo —tokens, tipografía, retícula, componentes, accesibilidad, rendimiento y procedencia de las imágenes— está documentado en [`DESIGN.md`](DESIGN.md).
 
 ## Despliegue
 
@@ -85,7 +95,7 @@ Configuración en GitHub:
 1. **Settings → Pages → Source: GitHub Actions** (ya configurado).
 2. Hacer merge a `master` o ejecutar el workflow manualmente.
 
-Despliegue validado:
+Último despliegue validado de SPEC-002:
 
 - Workflow `Deploy to GitHub Pages`: run `39375852568`, jobs `build` y `deploy` en verde.
 - CI de PR #2: run `39375636236` en verde; Playwright/axe 19/19.

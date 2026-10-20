@@ -1,20 +1,22 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-test('la home y la 404 no tienen violaciones axe', async ({ page }) => {
-  await page.goto('/');
+const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
-  let results = await new AxeBuilder({ page })
-    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
-    .analyze();
+test.describe('axe en tema claro y oscuro', () => {
+  for (const theme of ['light', 'dark'] as const) {
+    test(`home y 404 sin violaciones en tema ${theme}`, async ({ page }) => {
+      await page.goto('/');
+      await page.evaluate((value) => localStorage.setItem('theme', value), theme);
+      await page.reload();
 
-  expect(results.violations).toEqual([]);
+      let results = await new AxeBuilder({ page }).withTags(tags).analyze();
+      expect(results.violations, `home en tema ${theme}`).toEqual([]);
 
-  await page.goto('/404.html');
+      await page.goto('/404.html');
 
-  results = await new AxeBuilder({ page })
-    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
-    .analyze();
-
-  expect(results.violations).toEqual([]);
+      results = await new AxeBuilder({ page }).withTags(tags).analyze();
+      expect(results.violations, `404 en tema ${theme}`).toEqual([]);
+    });
+  }
 });
