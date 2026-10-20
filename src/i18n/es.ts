@@ -1,9 +1,26 @@
 export const es = {
-  header: {
-    home: 'Inicio',
-    mainNav: 'Navegación principal',
-    mobileNav: 'Navegación móvil',
-  },
+	drawing: {
+		sheetIndex: 'Índice de láminas',
+		titleBlock: 'Bloque de títulos',
+		portfolio: 'Portafolio / 2026',
+		sheet: 'Lámina',
+		sheetNumber: '00',
+		scale: 'Escala',
+		scaleValue: '1:1',
+		contact: 'Contacto',
+		year: '2026',
+		loadPath: 'Trazado de cargas',
+		loadPathDescription:
+			'Corte vertical del stack: interfaz, servicios, datos y operación con cargas de experiencia.',
+		metricsNote:
+			'Métricas de experiencia profesional, no de los proyectos listados.',
+		featuredIndex: 'Índice de proyectos destacados',
+	},
+	header: {
+		home: 'Inicio',
+		mainNav: 'Navegación principal',
+		mobileNav: 'Navegación móvil',
+	},
   nav: {
     services: 'Servicios',
     projects: 'Proyectos',

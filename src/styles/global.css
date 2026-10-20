@@ -1,40 +1,84 @@
 @import "tailwindcss";
+@import "@fontsource-variable/archivo/standard.css";
+@import "@fontsource/fragment-mono/latin.css";
 
-@theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-}
-
+/* Tokens semánticos del sistema «Trazado de cargas» (SPEC-003). */
 :root {
   color-scheme: light;
 
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-text: #0f172a;
-  --color-muted: #475569;
-  --color-border: #e2e8f0;
-  --color-accent: #0f766e;
-  --color-accent-hover: #115e59;
-  --color-accent-contrast: #ffffff;
-  --color-focus: #0d9488;
+  /* Tipografía */
+  --font-display: "Archivo Variable", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-annotation: "Fragment Mono", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  /* Escala de color en claro */
+  --paper: #f2eee4;
+  --paper-raised: #fbf8f0;
+  --ink: #15191b;
+  --ink-soft: #4c5455;
+  --rule: #c9c1af;
+  --rule-strong: #8b8476;
+  --oxide: #a64b33;
+  --oxide-strong: #7e3524;
+  --patina: #2e5f5a;
+  --on-signal: #fff9f0;
+  --focus: #1d5f86;
+  --grid: rgba(21, 25, 27, 0.04);
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --color-bg: #0b1120;
-  --color-surface: #111827;
-  --color-text: #f8fafc;
-  --color-muted: #94a3b8;
-  --color-border: #1e293b;
-  --color-accent: #2dd4bf;
-  --color-accent-hover: #5eead4;
-  --color-accent-contrast: #042f2e;
-  --color-focus: #5eead4;
+  --paper: #0f1416;
+  --paper-raised: #161c1f;
+  --ink: #f1ebdf;
+  --ink-soft: #b8b2a6;
+  --rule: #2d3537;
+  --rule-strong: #5c6769;
+  --oxide: #e18368;
+  --oxide-strong: #f0a18a;
+  --patina: #7cc0b7;
+  --on-signal: #0f1416;
+  --focus: #8ec9e8;
+  --grid: rgba(241, 235, 223, 0.05);
+}
+
+/* Exposición de los tokens a las utilidades de Tailwind. */
+@theme inline {
+  --font-sans: var(--font-display);
+  --font-mono: var(--font-annotation);
+
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-oxide: var(--oxide);
+  --color-oxide-strong: var(--oxide-strong);
+  --color-patina: var(--patina);
+  --color-on-signal: var(--on-signal);
+  --color-focus: var(--focus);
+  --color-grid: var(--grid);
+}
+
+/* Alias de compatibilidad con los componentes actuales. */
+:root {
+  --color-bg: var(--paper);
+  --color-surface: var(--paper-raised);
+  --color-text: var(--ink);
+  --color-muted: var(--ink-soft);
+  --color-border: var(--rule);
+  --color-accent: var(--oxide);
+  --color-accent-hover: var(--oxide-strong);
+  --color-accent-contrast: var(--on-signal);
+  --color-focus: var(--focus);
 }
 
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-display);
 }
 
 @media (prefers-reduced-motion: reduce) {
