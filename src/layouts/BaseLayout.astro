@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -24,6 +25,13 @@ const {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link
+			rel="preload"
+			href={archivoLatin}
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<SEO
 			title={title}

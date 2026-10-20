@@ -1,124 +1,92 @@
 ---
 import Icon from './Icon.astro';
-import TitleBlock from './drawing/TitleBlock.astro';
-import LoadPath from './drawing/LoadPath.astro';
 import { profile } from '../data/profile';
 import { featuredProjects } from '../data/projects';
 import { es } from '../i18n/es';
 ---
 
-<section
-	id="inicio"
-	class="sheet-grid relative overflow-hidden border-b border-rule"
-	aria-labelledby="hero-title"
->
-	<span
-		aria-hidden="true"
-		class="pointer-events-none absolute left-4 top-4 font-mono text-xl font-bold text-rule-strong select-none"
-	>+</span>
-	<span
-		aria-hidden="true"
-		class="pointer-events-none absolute right-4 top-4 font-mono text-xl font-bold text-rule-strong select-none"
-	>+</span>
-	<span
-		aria-hidden="true"
-		class="pointer-events-none absolute bottom-4 left-4 font-mono text-xl font-bold text-rule-strong select-none"
-	>+</span>
-	<span
-		aria-hidden="true"
-		class="pointer-events-none absolute bottom-4 right-4 font-mono text-xl font-bold text-rule-strong select-none"
-	>+</span>
+<section id="inicio" aria-labelledby="hero-title">
+	<div class="report-shell pb-16 pt-14 sm:pt-20">
+		<p class="data text-ink-soft">
+			{es.report.kicker} / {es.report.period}
+		</p>
 
-	<div class="relative mx-auto max-w-6xl px-6 pb-12 pt-14 sm:pb-14 sm:pt-16 lg:pb-16 lg:pt-20">
-		<div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,21rem)] lg:items-start lg:gap-14">
-			<div>
-				<TitleBlock name={profile.name} role={profile.role} />
+		<h1 id="hero-title" class="mt-6 max-w-4xl">
+			{profile.name}<span class="mt-3 block text-[0.42em] font-medium leading-tight tracking-[-0.01em] text-ink-soft">{profile.role}</span>
+		</h1>
 
-				<p class="mt-7 max-w-2xl text-lg font-semibold leading-relaxed">
-					{profile.tagline}
-				</p>
-				<p class="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
-					{profile.summary}
-				</p>
+		<p class="prose-measure mt-8 text-xl font-medium leading-snug">
+			{profile.tagline}
+		</p>
+		<p class="prose-measure mt-4 text-ink-soft">
+			{profile.summary}
+		</p>
 
-				<div class="mt-7 flex flex-wrap items-center gap-3">
+		<div class="mt-8 flex flex-wrap items-center gap-3">
+			<a
+				href="#proyectos"
+				class="inline-flex items-center gap-2 bg-oxide px-5 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong"
+			>
+				{es.ctas.projects}
+				<Icon name="arrow" class="h-4 w-4" />
+			</a>
+			{
+				profile.cvUrl && (
 					<a
-						href="#proyectos"
-						class="inline-flex items-center gap-2 rounded-md bg-oxide px-5 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong"
+						href={profile.cvUrl}
+						download
+						class="inline-flex items-center gap-2 border border-rule-strong px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-oxide"
 					>
-						{es.ctas.projects}
-						<Icon name="arrow" class="h-4 w-4" />
+						{es.ctas.cv}
 					</a>
-					{
-						profile.cvUrl && (
-							<a
-								href={profile.cvUrl}
-								download
-								class="inline-flex items-center gap-2 rounded-md border border-rule-strong bg-paper px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-oxide"
-							>
-								{es.ctas.cv}
-							</a>
-						)
-					}
-				</div>
-
-				<ul class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm text-ink-soft">
-					<li>
-						<a
-							href={profile.github}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="inline-flex items-center gap-1.5 transition-colors hover:text-ink"
-						>
-							{es.ctas.github}
-							<Icon name="external" class="h-3.5 w-3.5" />
-							<span class="sr-only"> {es.a11y.externalLink}</span>
-						</a>
-					</li>
-					<li>
-						<a
-							href={profile.linkedin}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="inline-flex items-center gap-1.5 transition-colors hover:text-ink"
-						>
-							{es.ctas.linkedin}
-							<Icon name="external" class="h-3.5 w-3.5" />
-							<span class="sr-only"> {es.a11y.externalLink}</span>
-						</a>
-					</li>
-					<li>
-						<a
-							href="#contacto"
-							class="inline-flex underline decoration-rule-strong underline-offset-4 transition-colors hover:decoration-oxide"
-						>
-							{es.drawing.contact}
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<LoadPath class="shrink-0" />
+				)
+			}
 		</div>
 
-		<div class="mt-6 border-t border-rule pt-4">
-			<p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-soft">
-				{es.drawing.featuredIndex}
-			</p>
+		<ul class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-soft">
+			<li>
+				<a
+					href={profile.github}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="link-underline inline-flex items-center gap-1.5"
+				>
+					{es.ctas.github}
+					<Icon name="external" class="h-3.5 w-3.5" />
+					<span class="sr-only"> {es.a11y.externalLink}</span>
+				</a>
+			</li>
+			<li>
+				<a
+					href={profile.linkedin}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="link-underline inline-flex items-center gap-1.5"
+				>
+					{es.ctas.linkedin}
+					<Icon name="external" class="h-3.5 w-3.5" />
+					<span class="sr-only"> {es.a11y.externalLink}</span>
+				</a>
+			</li>
+			<li>
+				<a href="#contacto" class="link-underline">{es.nav.contact}</a>
+			</li>
+		</ul>
+
+		<div class="mt-12 border-t border-rule pt-4">
+			<p class="data text-ink-soft">{es.report.selectedWork}</p>
 			<ol class="mt-3 grid gap-2 sm:grid-cols-3">
 				{
 					featuredProjects.map((project, index) => (
 						<li>
 							<a
 								href="#proyectos"
-								class="group flex items-baseline gap-3 border border-rule bg-paper-raised px-4 py-3 transition-colors hover:border-oxide"
+								class="flex items-baseline gap-3 border border-rule px-4 py-3 transition-colors hover:border-oxide"
 							>
-								<span class="font-mono text-xs text-ink-soft">
-									{`01.${index + 1}`}
+								<span class="data text-ink-soft">
+									{`0${index + 1}`}
 								</span>
-								<span class="font-semibold text-ink transition-colors group-hover:text-oxide">
-									{project.title}
-								</span>
+								<span class="font-semibold">{project.title}</span>
 							</a>
 						</li>
 					))
@@ -127,12 +95,3 @@ import { es } from '../i18n/es';
 		</div>
 	</div>
 </section>
-
-<style>
-	.sheet-grid {
-		background-image:
-			linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
-			linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
-		background-size: 56px 56px;
-	}
-</style>

@@ -1,20 +1,21 @@
 export const es = {
-	drawing: {
-		sheetIndex: 'Índice de láminas',
-		titleBlock: 'Bloque de títulos',
-		portfolio: 'Portafolio / 2026',
-		sheet: 'Lámina',
-		sheetNumber: '00',
-		scale: 'Escala',
-		scaleValue: '1:1',
-		contact: 'Contacto',
-		year: '2026',
-		loadPath: 'Trazado de cargas',
-		loadPathDescription:
-			'Corte vertical del stack: interfaz, servicios, datos y operación con cargas de experiencia.',
+	report: {
+		kicker: 'Informe de gestión',
+		period: '2026',
+		highlights: 'Cifras del periodo',
 		metricsNote:
 			'Métricas de experiencia profesional, no de los proyectos listados.',
-		featuredIndex: 'Índice de proyectos destacados',
+		selectedWork: 'Trabajo seleccionado',
+		services: 'Alcance',
+		otherProjects: 'Registro adicional',
+		experience: 'Trayectoria',
+		stack: 'Capacidades',
+		about: 'Nota del autor',
+		contact: 'Correspondencia',
+		colophon: 'Colofón',
+		errata: 'Fe de erratas',
+		case: 'Caso',
+		scope: 'Ámbito',
 	},
 	header: {
 		home: 'Inicio',
