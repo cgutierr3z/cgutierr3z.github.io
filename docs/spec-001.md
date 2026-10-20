@@ -935,7 +935,7 @@ Workflow `.github/workflows/deploy.yml`:
 
 Mientras el propietario confirma cada ítem, la implementación aplica lo siguiente sin inventar datos:
 
-- Item 1: email presente en `profile.ts` (añadido por el propietario); los ítems 2-5 no se renderizan (CV no enlazado, foto/ubicación/disponibilidad ausentes; hero usa monograma `CG`). El CV local existe en `assets/`, pero contiene datos confidenciales y no debe publicarse.
+- Item 1: email presente en `profile.ts` (añadido por el propietario); los ítems 2-5 no se renderizan (CV no enlazado, foto/ubicación/disponibilidad ausentes; hero usa monograma `CG`). El CV local fue retirado del repositorio por contener datos confidenciales; se conserva fuera de Git para su revisión.
 - Consistencia pendiente: el CV usa el título “Analista de Desarrollo” y “más de 50 formularios”; el sitio usa “Desarrollador Full Stack” y “más de 50 aplicaciones”. Confirmar la formulación exacta antes de publicar.
 - Items 6-9: descripciones derivadas de los repositorios públicos y roles designados en el repositorio; se muestran tal cual si el propietario aprueba el copy final.
 - Items 10-11: no se usan screenshots ni el diagrama; se muestran tarjetas de texto (si se aprueban, se agregan con `image` e `imageAlt`).
