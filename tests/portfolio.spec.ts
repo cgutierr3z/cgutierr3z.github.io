@@ -112,6 +112,14 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     if (count > 0) {
       await expect(cvLinks.first()).toHaveAttribute('href', /\.pdf$/i);
       await expect(cvLinks.first()).toHaveAttribute('download', '');
+
+      const href = await cvLinks.first().getAttribute('href');
+      expect(href).toBeTruthy();
+      const response = await page.request.get(
+        new URL(href!, page.url()).toString(),
+      );
+      expect(response.ok()).toBe(true);
+      expect(response.headers()['content-type']).toContain('application/pdf');
     }
   });
 

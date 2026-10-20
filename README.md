@@ -40,6 +40,7 @@ El servidor de desarrollo estará disponible en `http://localhost:4321`.
 | `bun run test:e2e:headed` | Playwright con navegador visible |
 | `bun run test:a11y` | Auditoría axe en home y 404 |
 | `bun run test:lighthouse` | Lighthouse local contra `http://127.0.0.1:4321` |
+| `bun run cv:generate` | Regenera el CV público en `public/cv/` |
 
 ### Tests
 
@@ -60,11 +61,13 @@ CHROME_PATH=/ruta/a/chrome bun run test:lighthouse
 
 El contenido se centraliza en `src/data/` para poder actualizarlo sin modificar los componentes:
 
-- `profile.ts`: nombre, rol, resumen, contacto y enlaces.
+- `profile.ts`: nombre, rol, resumen, contacto, CV y enlaces.
 - `services.ts`: servicios profesionales.
 - `projects.ts`: proyectos y enlaces.
 - `experience.ts`: experiencia laboral.
 - `technologies.ts`: stack agrupado.
+
+El CV público se genera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`.
 
 Las cadenas principales de interfaz se encuentran en `src/i18n/es.ts`; parte del copy de secciones vive en los componentes. El MVP está en español y la estructura permite extraer el resto al añadir inglés.
 
@@ -82,7 +85,7 @@ Configuración requerida en GitHub:
 
 El nombre de la empresa del empleador actual/anterior es confidencial. No debe incluirse en el código, el contenido, los tests, los commits, los metadatos, las imágenes ni el sitio generado. En la experiencia se muestra como **“Empresa confidencial”**.
 
-Antes de publicar un CV, revisar que no incluya el nombre de la empresa, teléfono ni dirección. El CV local no se versiona ni se publica hasta completar esa revisión; las rutas `assets/CV_ATS_2026_Carlos_Gutierrez.pdf` y `public/assets/CV_ATS_2026_Carlos_Gutierrez.pdf` están ignoradas por Git.
+El CV público está sanitizado: no incluye nombres de empleadores, teléfono ni dirección. Se regenera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`. El PDF original sin sanear está fuera del repositorio y sus rutas están ignoradas por Git.
 
 ## Configuración local
 

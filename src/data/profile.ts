@@ -9,4 +9,5 @@ export const profile: Profile = {
   email: 'cgutierrez@utp.edu.co',
   github: 'https://github.com/cgutierr3z',
   linkedin: 'https://www.linkedin.com/in/cgutierr3z/',
+  cvUrl: '/cv/carlos-gutierrez-cv.pdf',
 };

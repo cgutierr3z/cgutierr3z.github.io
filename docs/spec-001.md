@@ -5,7 +5,7 @@
 | **ID** | SPEC-001 |
 | **Versión** | 1.1 — Aprobado, con implementación en curso |
 | **Fecha** | 2026-10-19 y 2026-10-20 |
-| **Estado** | Aprobado por el propietario · Implementación: T-001 – T-018 completadas (T-019/T-020 pendientes) |
+| **Estado** | Aprobado por el propietario · Implementación: T-001 – T-018 completadas; T-019 en curso (solo métricas); T-020 pendiente |
 | **Repositorio** | https://github.com/cgutierr3z/cgutierr3z.github.io |
 | **Sitio objetivo** | https://cgutierr3z.github.io/ |
 | **Rama de implementación** | `feat/spec-001-portfolio` |
@@ -784,7 +784,7 @@ Workflow `.github/workflows/deploy.yml`:
 | T-016 | Completada | Imágenes (`og-image.png`, favicon SVG monograma) locales; `alt` en elementos visuales; sin imágenes remotas. |
 | T-017 | Completada | `tests/portfolio.spec.ts` (11 casos E2E) + `tests/a11y.spec.ts` (0 violaciones críticas/serias en `/` y `404.html`). |
 | T-018 | Completada | `.github/workflows/deploy.yml` con acciones fijadas, Bun 1.4.3, `check`, `build`, Playwright/axe en CI y deploy a Pages. Primera ejecución real pendiente. |
-| T-019 | Pendiente | Email presente en `profile.ts` (añadido por el propietario). CV local recibido, pero contiene el nombre del empleador y datos de contacto; no es apto para publicar. Faltan foto y confirmaciones de copy/métricas. Content gate bloquea deploy. |
+| T-019 | En curso | Aprobados: email, rol “Desarrollador Full Stack”, métrica “+50 aplicaciones”, copy/roles de proyectos, CV saneado y educación. El CV público está en `public/cv/carlos-gutierrez-cv.pdf`, sin empleadores, teléfono ni dirección. Falta confirmar la publicación de 100–500 usuarios, ~5 endpoints y 2 tipos de CRM que ya figuran en el sitio. |
 | T-020 | Pendiente | Auditoría manual de código completada; el subagente `code-reviewer` no estuvo disponible por cuota. Pendiente T-019 y la auditoría final de confidencialidad. |
 
 ---
@@ -855,7 +855,8 @@ Workflow `.github/workflows/deploy.yml`:
 - T-001 – T-018: completadas en la rama `feat/spec-001-portfolio`.
 - Resultados medidos localmente: `bun run check` 0 errores; `bun run build` OK (2 páginas); `bunx playwright test` 12/12 OK; axe 0 violaciones críticas/serias; Lighthouse móvil (Chromium headless): performance 99, accessibility 100, best-practices 100, seo 100.
 - T-018: workflow de deploy creado con acciones fijadas, Bun, check/build, Playwright/axe y deploy a Pages. La primera ejecución real en GitHub queda pendiente.
-- T-019: content gate pendiente (CV no publicable, foto y confirmaciones de copy/métricas). No hacer merge a `master` hasta resolverlo.
+- T-019: email, rol, métrica principal, proyectos, CV saneado y educación aprobados. El CV público se genera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`. Queda confirmar las métricas 100–500 usuarios, ~5 endpoints y 2 CRM del sitio, y revisar LinkedIn.
+- No hacer merge a `master` hasta resolver las métricas y revisar LinkedIn.
 
 ---
 
@@ -908,20 +909,20 @@ Workflow `.github/workflows/deploy.yml`:
 
 | # | Dato | Necesario para | Bloquea deploy | Estado |
 |---|---|---|---|---|
-| 1 | Email profesional | Contacto y footer | Sí | Presente en `profile.ts`; confirmación final pendiente |
-| 2 | CV en PDF | Descarga de CV | Sí, si se publica CV | Recibido; no apto para publicar (empleador y datos de contacto) |
-| 3 | Foto profesional | Hero/Sobre mí | No; usar monograma | Pendiente |
-| 4 | Ubicación y zona horaria | Hero/Contacto | No | Pendiente |
-| 5 | Disponibilidad | Hero/Contacto | No | Pendiente |
-| 6 | Descripción y rol en `coffee-shop` | Proyecto destacado | Sí | Pendiente |
-| 7 | Descripción y rol en `pt-recisa` | Proyecto destacado | Sí | Pendiente |
-| 8 | Descripción y rol en los 5 proyectos académicos | Otros proyectos | Sí | Pendiente |
-| 9 | Individual/equipo en proyectos académicos | Atribución | Sí | Pendiente |
-| 10 | Permiso para screenshots | Imágenes de proyectos | No; usar placeholder | Pendiente |
-| 11 | Autoría del diagrama de `sparcv8-monocycle` | Atribución | No; omitir imagen | Pendiente |
-| 12 | Confirmación de publicación de métricas | Experiencia | Sí | Pendiente |
-| 13 | Alcance de la confidencialidad (sitio, CV, LinkedIn) | Privacidad | Sí | Pendiente |
-| 14 | Aprobación de tagline, bio y servicios | Copy final | Sí | Pendiente |
+| 1 | Email profesional | Contacto y footer | Sí | Aprobado: `cgutierrez@utp.edu.co` |
+| 2 | CV en PDF | Descarga de CV | Sí, si se publica CV | Publicado saneado en `public/cv/carlos-gutierrez-cv.pdf` |
+| 3 | Foto profesional | Hero/Sobre mí | No; usar monograma | Omitida; se usa monograma |
+| 4 | Ubicación y zona horaria | Hero/Contacto | No | Omitida |
+| 5 | Disponibilidad | Hero/Contacto | No | Omitida |
+| 6 | Descripción y rol en `coffee-shop` | Proyecto destacado | Sí | Aprobado con el copy actual |
+| 7 | Descripción y rol en `pt-recisa` | Proyecto destacado | Sí | Aprobado con el copy actual |
+| 8 | Descripción y rol en los 5 proyectos académicos | Otros proyectos | Sí | Aprobado con el copy actual |
+| 9 | Individual/equipo en proyectos académicos | Atribución | Sí | Aprobado con el copy actual; sin atribuciones a terceros |
+| 10 | Permiso para screenshots | Imágenes de proyectos | No; usar placeholder | Cerrado: no se usan screenshots |
+| 11 | Autoría del diagrama de `sparcv8-monocycle` | Atribución | No; omitir imagen | Cerrado: no se usa el diagrama |
+| 12 | Confirmación de publicación de métricas | Experiencia | Sí | Pendiente: 100–500 usuarios, ~5 endpoints y 2 CRM |
+| 13 | Alcance de la confidencialidad (sitio, CV, LinkedIn) | Privacidad | Sí | CV: todos los empleadores anonimizados; LinkedIn pendiente de revisión |
+| 14 | Aprobación de tagline, bio y servicios | Copy final | Sí | Aprobado con el copy actual |
 | 15 | Formulario de contacto | Alcance | No; default no | Cerrado: no |
 | 16 | Analítica | Alcance | No; default no | Cerrado: no |
 | 17 | Dominio propio | Alcance | No; default no | Cerrado: no |
@@ -935,13 +936,16 @@ Workflow `.github/workflows/deploy.yml`:
 
 Mientras el propietario confirma cada ítem, la implementación aplica lo siguiente sin inventar datos:
 
-- Item 1: email presente en `profile.ts` (añadido por el propietario); los ítems 2-5 no se renderizan (CV no enlazado, foto/ubicación/disponibilidad ausentes; hero usa monograma `CG`). El CV local fue retirado del repositorio por contener datos confidenciales; se conserva fuera de Git para su revisión.
-- Consistencia pendiente: el CV usa el título “Analista de Desarrollo” y “más de 50 formularios”; el sitio usa “Desarrollador Full Stack” y “más de 50 aplicaciones”. Confirmar la formulación exacta antes de publicar.
-- Items 6-9: descripciones derivadas de los repositorios públicos y roles designados en el repositorio; se muestran tal cual si el propietario aprueba el copy final.
-- Items 10-11: no se usan screenshots ni el diagrama; se muestran tarjetas de texto (si se aprueban, se agregan con `image` e `imageAlt`).
-- Item 12: se muestran métricas declaradas en `achievements` (verificables contra los repositorios, no inventadas).
+- Item 1: email aprobado (`cgutierrez@utp.edu.co`) y presente en `profile.ts`.
+- Item 2: CV saneado publicado en `public/cv/carlos-gutierrez-cv.pdf`; se genera con `bun run cv:generate`. Todos los empleadores aparecen como “Empresa confidencial”; no hay teléfono ni dirección.
+- Items 3-5: foto, ubicación y disponibilidad omitidas; el hero usa el monograma `CG`.
+- Items 6-9: copy y roles actuales aprobados por el propietario; sin atribuciones a terceros.
+- Items 10-11: no se usan screenshots ni el diagrama de `sparcv8-monocycle`.
+- Item 12: el sitio mantiene las métricas declaradas (100–500 usuarios, ~5 endpoints y 2 CRM); su publicación sigue pendiente de confirmación. El CV solo incluye “+50 aplicaciones”.
+- Item 13: el CV anonimiza todos los empleadores; revisar LinkedIn antes de publicar.
+- Item 18: educación incluida en el CV; idiomas omitidos; sin certificaciones publicadas.
 - Item 19: acento teal (`#0f766e`/`#2dd4bf`), tipografía por sistema (`ui-sans-serif`), logo monograma `CG`.
-- Todo queda bloqueado para deploy hasta el content gate.
+- El deploy sigue bloqueado hasta confirmar el ítem 12 y revisar LinkedIn.
 
 ---
 
@@ -998,21 +1002,21 @@ Twitter: summary_large_image
 
 ### C. Checklist de contenido antes del deploy
 
-- [ ] Nombre y rol aprobados.
-- [ ] Email aprobado.
-- [ ] CV aprobado y revisado por confidencialidad, si se publica.
-- [ ] Foto aprobada, si se usa.
-- [ ] Ubicación/zonas horaria y disponibilidad aprobadas.
-- [ ] Tagline, resumen y bio aprobados.
-- [ ] Servicios aprobados.
-- [ ] Experiencia anonimizada aprobada.
-- [ ] Métricas aprobadas.
-- [ ] Descripciones y roles de los 8 proyectos aprobados.
-- [ ] Etiquetas de tipo de proyecto aprobadas.
-- [ ] Enlaces de demo/repositorio verificados.
-- [ ] Screenshots autorizados o placeholders neutros.
-- [ ] Sin nombre del empleador en el contenido.
-- [ ] Sin datos inventados.
+- [x] Nombre y rol aprobados.
+- [x] Email aprobado.
+- [x] CV aprobado y revisado por confidencialidad, si se publica.
+- [x] Foto no usada; se mantiene el monograma.
+- [x] Ubicación, zona horaria y disponibilidad no usadas.
+- [x] Tagline, resumen y bio aprobados.
+- [x] Servicios aprobados.
+- [x] Experiencia anonimizada aprobada.
+- [ ] Métricas aprobadas (pendiente: 100–500 usuarios, ~5 endpoints y 2 CRM).
+- [x] Descripciones y roles de los 8 proyectos aprobados.
+- [x] Etiquetas de tipo de proyecto aprobadas.
+- [x] Enlaces de demo/repositorio verificados.
+- [x] Screenshots no usados; se mantienen tarjetas neutras.
+- [x] Sin nombre del empleador en el contenido.
+- [x] Sin datos inventados.
 - [ ] Sin placeholders en producción.
 
 ### D. Nota sobre el flujo SDD
