@@ -185,16 +185,20 @@ const html = `<!doctype html>
         <ul>
           <li>
             Participación en la migración de más de 50 aplicaciones empresariales,
-            migrando formularios PHP/Yii 1 a React + Form.io para CRM internos y
-            orientados a clientes.
+            migrando formularios PHP/Yii 1 a React + Form.io para dos tipos de CRM:
+            internos y orientados a clientes.
           </li>
           <li>
             Desarrollo de herramienta batch en Node.js para migración DB2 →
             PostgreSQL mediante CSV y APIs REST, con registros de auditoría.
           </li>
           <li>
-            Integración de APIs REST y desarrollo de endpoints en AWS Lambda para
-            procesos de integración y procesamiento de información.
+            Integración de APIs REST y servicios en AWS Lambda para procesos de
+            integración y procesamiento de información.
+          </li>
+          <li>
+            Soporte y mantenimiento de soluciones utilizadas por entre 100 y 500
+            usuarios por instancia de producción.
           </li>
           <li>
             Gestión de requerimientos e incidentes P1/P2, incluyendo guardias

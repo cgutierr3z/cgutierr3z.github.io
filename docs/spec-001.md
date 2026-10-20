@@ -5,7 +5,7 @@
 | **ID** | SPEC-001 |
 | **Versión** | 1.1 — Aprobado, con implementación en curso |
 | **Fecha** | 2026-10-19 y 2026-10-20 |
-| **Estado** | Aprobado por el propietario · Implementación: T-001 – T-018 completadas; T-019 en curso (solo métricas); T-020 pendiente |
+| **Estado** | Aprobado por el propietario · Implementación: T-001 – T-019 completadas; T-020 pendiente |
 | **Repositorio** | https://github.com/cgutierr3z/cgutierr3z.github.io |
 | **Sitio objetivo** | https://cgutierr3z.github.io/ |
 | **Rama de implementación** | `feat/spec-001-portfolio` |
@@ -784,7 +784,7 @@ Workflow `.github/workflows/deploy.yml`:
 | T-016 | Completada | Imágenes (`og-image.png`, favicon SVG monograma) locales; `alt` en elementos visuales; sin imágenes remotas. |
 | T-017 | Completada | `tests/portfolio.spec.ts` (11 casos E2E) + `tests/a11y.spec.ts` (0 violaciones críticas/serias en `/` y `404.html`). |
 | T-018 | Completada | `.github/workflows/deploy.yml` con acciones fijadas, Bun 1.4.3, `check`, `build`, Playwright/axe en CI y deploy a Pages. Primera ejecución real pendiente. |
-| T-019 | En curso | Aprobados: email, rol “Desarrollador Full Stack”, métrica “+50 aplicaciones”, copy/roles de proyectos, CV saneado y educación. El CV público está en `public/cv/carlos-gutierrez-cv.pdf`, sin empleadores, teléfono ni dirección. Falta confirmar la publicación de 100–500 usuarios, ~5 endpoints y 2 tipos de CRM que ya figuran en el sitio. |
+| T-019 | Completada | Aprobados: email, rol “Desarrollador Full Stack”, “+50 aplicaciones”, “100–500 usuarios” y “2 tipos de CRM”; se eliminaron las referencias a los ~5 endpoints. Copy/roles de proyectos, CV saneado y educación aprobados. El CV público está en `public/cv/carlos-gutierrez-cv.pdf`, sin empleadores, teléfono ni dirección. LinkedIn queda como enlace externo aprobado, sujeto a revisión del propietario. |
 | T-020 | Pendiente | Auditoría manual de código completada; el subagente `code-reviewer` no estuvo disponible por cuota. Pendiente T-019 y la auditoría final de confidencialidad. |
 
 ---
@@ -855,8 +855,8 @@ Workflow `.github/workflows/deploy.yml`:
 - T-001 – T-018: completadas en la rama `feat/spec-001-portfolio`.
 - Resultados medidos localmente: `bun run check` 0 errores; `bun run build` OK (2 páginas); `bunx playwright test` 12/12 OK; axe 0 violaciones críticas/serias; Lighthouse móvil (Chromium headless): performance 99, accessibility 100, best-practices 100, seo 100.
 - T-018: workflow de deploy creado con acciones fijadas, Bun, check/build, Playwright/axe y deploy a Pages. La primera ejecución real en GitHub queda pendiente.
-- T-019: email, rol, métrica principal, proyectos, CV saneado y educación aprobados. El CV público se genera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`. Queda confirmar las métricas 100–500 usuarios, ~5 endpoints y 2 CRM del sitio, y revisar LinkedIn.
-- No hacer merge a `master` hasta resolver las métricas y revisar LinkedIn.
+- T-019: email, rol, “+50 aplicaciones”, “100–500 usuarios”, “2 tipos de CRM”, proyectos, CV saneado y educación aprobados. Se eliminaron las referencias a los ~5 endpoints. El CV público se genera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`.
+- LinkedIn queda como enlace externo aprobado; su contenido debe revisarse fuera del repositorio.
 
 ---
 
@@ -920,8 +920,8 @@ Workflow `.github/workflows/deploy.yml`:
 | 9 | Individual/equipo en proyectos académicos | Atribución | Sí | Aprobado con el copy actual; sin atribuciones a terceros |
 | 10 | Permiso para screenshots | Imágenes de proyectos | No; usar placeholder | Cerrado: no se usan screenshots |
 | 11 | Autoría del diagrama de `sparcv8-monocycle` | Atribución | No; omitir imagen | Cerrado: no se usa el diagrama |
-| 12 | Confirmación de publicación de métricas | Experiencia | Sí | Pendiente: 100–500 usuarios, ~5 endpoints y 2 CRM |
-| 13 | Alcance de la confidencialidad (sitio, CV, LinkedIn) | Privacidad | Sí | CV: todos los empleadores anonimizados; LinkedIn pendiente de revisión |
+| 12 | Confirmación de publicación de métricas | Experiencia | Sí | Aprobado: 100–500 usuarios y 2 tipos de CRM; ~5 endpoints eliminados |
+| 13 | Alcance de la confidencialidad (sitio, CV, LinkedIn) | Privacidad | Sí | CV: todos los empleadores anonimizados; LinkedIn: enlace externo aprobado, revisión del propietario |
 | 14 | Aprobación de tagline, bio y servicios | Copy final | Sí | Aprobado con el copy actual |
 | 15 | Formulario de contacto | Alcance | No; default no | Cerrado: no |
 | 16 | Analítica | Alcance | No; default no | Cerrado: no |
@@ -941,11 +941,11 @@ Mientras el propietario confirma cada ítem, la implementación aplica lo siguie
 - Items 3-5: foto, ubicación y disponibilidad omitidas; el hero usa el monograma `CG`.
 - Items 6-9: copy y roles actuales aprobados por el propietario; sin atribuciones a terceros.
 - Items 10-11: no se usan screenshots ni el diagrama de `sparcv8-monocycle`.
-- Item 12: el sitio mantiene las métricas declaradas (100–500 usuarios, ~5 endpoints y 2 CRM); su publicación sigue pendiente de confirmación. El CV solo incluye “+50 aplicaciones”.
-- Item 13: el CV anonimiza todos los empleadores; revisar LinkedIn antes de publicar.
+- Item 12: aprobadas “100–500 usuarios” y “2 tipos de CRM”; se eliminaron las referencias a los ~5 endpoints del sitio y del CV.
+- Item 13: el CV anonimiza todos los empleadores; LinkedIn queda como enlace externo aprobado, sujeto a revisión del propietario.
 - Item 18: educación incluida en el CV; idiomas omitidos; sin certificaciones publicadas.
 - Item 19: acento teal (`#0f766e`/`#2dd4bf`), tipografía por sistema (`ui-sans-serif`), logo monograma `CG`.
-- El deploy sigue bloqueado hasta confirmar el ítem 12 y revisar LinkedIn.
+- El contenido del repositorio y del sitio queda aprobado; el deploy queda pendiente de la revisión externa de LinkedIn y del cierre de T-020.
 
 ---
 
@@ -1010,7 +1010,7 @@ Twitter: summary_large_image
 - [x] Tagline, resumen y bio aprobados.
 - [x] Servicios aprobados.
 - [x] Experiencia anonimizada aprobada.
-- [ ] Métricas aprobadas (pendiente: 100–500 usuarios, ~5 endpoints y 2 CRM).
+- [x] Métricas aprobadas: 100–500 usuarios y 2 tipos de CRM; sin referencia a ~5 endpoints.
 - [x] Descripciones y roles de los 8 proyectos aprobados.
 - [x] Etiquetas de tipo de proyecto aprobadas.
 - [x] Enlaces de demo/repositorio verificados.
