@@ -268,3 +268,136 @@ p {
 [data-theme="dark"] .theme-icon-moon {
   display: block;
 }
+
+/* Cambio de tema y de superficies: 200 ms. */
+body,
+header,
+footer,
+.report-section {
+  transition: background-color 200ms ease, border-color 200ms ease,
+    color 200ms ease;
+}
+
+/* Aparición sobria de secciones: solo con JS y sin reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-js] [data-reveal] {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 460ms ease, transform 460ms ease;
+  }
+
+  [data-js] [data-reveal][data-revealed="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Impresión: el informe en papel, sin navegación ni campos de color. */
+@media print {
+  :root {
+    --paper: #ffffff;
+    --paper-raised: #ffffff;
+    --ink: #000000;
+    --ink-soft: #333333;
+    --rule: #bbbbbb;
+    --rule-strong: #555555;
+    --oxide: #000000;
+    --oxide-strong: #000000;
+    --patina: #ffffff;
+    --on-signal: #000000;
+    --focus: #000000;
+  }
+
+  @page {
+    margin: 18mm 16mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10.5pt;
+  }
+
+  header nav,
+  #menu-toggle,
+  .theme-toggle,
+  [data-print-hidden] {
+    display: none !important;
+  }
+
+  header {
+    position: static;
+    background: #ffffff !important;
+    border-bottom: 1px solid #000000;
+  }
+
+  .report-section {
+    padding-block: 1.5rem;
+    border-top: 1px solid #999999;
+    break-inside: auto;
+  }
+
+  .field-patina,
+  .field-oxide,
+  .field-ink {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #999999;
+  }
+
+  .field-patina *,
+  .field-oxide *,
+  .field-ink *,
+  .bg-oxide,
+  .bg-ink,
+  .text-on-signal,
+  .text-paper {
+    color: #000000 !important;
+  }
+
+  .bg-oxide,
+  .bg-ink {
+    background: #ffffff !important;
+    border: 1px solid #000000;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  article,
+  li,
+  summary {
+    break-inside: avoid;
+  }
+
+  a {
+    color: #000000 !important;
+    text-decoration: underline;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}
