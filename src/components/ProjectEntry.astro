@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+import { es } from '../i18n/es';
+import type { Project, ProjectLink } from '../data/types';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+
+const fields = ['field-patina', 'field-oxide', 'field-ink'] as const;
+const field = fields[index % fields.length];
+
+const linkLabel = (link: ProjectLink): string =>
+  link.label?.trim() || (link.type === 'demo' ? 'Demo' : 'Repositorio');
+---
+
+<article
+	id={`proyecto-${project.slug}`}
+	class="scroll-mt-24 border-t border-rule-strong first:border-t-0 lg:grid lg:grid-cols-12"
+	aria-labelledby={`${project.slug}-title`}
+>
+	<div class:list={[field, 'flex flex-col justify-between p-6 sm:p-8 lg:col-span-4']}>
+		<div class="flex items-baseline justify-between gap-4">
+			<p class="data">{es.report.case}</p>
+			<p class="data">{project.year}</p>
+		</div>
+
+		<div class="mt-8 lg:mt-14">
+			<p class="text-[clamp(3.5rem,6vw,5.5rem)] font-semibold leading-none tracking-[-0.05em] tabular-nums">
+				{`0${index + 1}`}
+			</p>
+			<p class="data mt-4">{es.projectTypes[project.type]}</p>
+		</div>
+	</div>
+
+	<div class="border-x border-b border-rule px-6 py-6 sm:px-8 sm:py-8 lg:col-span-8 lg:border-l-0 lg:border-t-0 lg:py-10">
+		<dl class="flex flex-wrap gap-x-8 gap-y-2 border-b border-rule pb-4">
+			<div class="flex items-baseline gap-2">
+				<dt class="data text-ink-soft">{es.projectMeta.category}</dt>
+				<dd class="data-plain text-sm">{es.projectCategories[project.category]}</dd>
+			</div>
+			<div class="flex items-baseline gap-2">
+				<dt class="data text-ink-soft">{es.projectMeta.year}</dt>
+				<dd class="data-plain text-sm">{project.year}</dd>
+			</div>
+		</dl>
+
+		<h3 id={`${project.slug}-title`} class="mt-5 text-2xl leading-tight sm:text-3xl">
+			{project.title}
+		</h3>
+
+		<p class="prose-measure mt-3 text-ink-soft">{project.summary}</p>
+
+		{
+			project.disclosure && (
+				<details class="mt-5 border-t border-rule pt-4">
+					<summary class="cursor-pointer text-sm font-semibold text-ink marker:text-oxide">
+						{es.report.caseDetail}
+					</summary>
+					<p class="prose-measure mt-3 text-sm leading-relaxed text-ink-soft">
+						{project.disclosure}
+					</p>
+				</details>
+			)
+		}
+
+		<div class="mt-6 flex flex-col gap-4 border-t border-rule pt-4 sm:flex-row sm:items-start sm:justify-between">
+			<div>
+				<p class="data text-ink-soft">{es.labels.technologies}</p>
+				<ul class="mt-2 flex flex-wrap gap-x-2 gap-y-1">
+					{project.stack.map((technology) => (
+						<li class="border border-rule px-2 py-0.5 text-xs">
+							{technology}
+						</li>
+					))}
+				</ul>
+			</div>
+
+			<div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+				{project.links.map((link) => (
+					<a
+						href={link.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label={`${linkLabel(link)} de ${project.title}. ${es.a11y.externalLink}`}
+						class="inline-flex items-center gap-1.5 text-sm font-semibold text-oxide transition-colors hover:text-oxide-strong"
+					>
+						{linkLabel(link)}
+						<Icon name="external" class="h-3.5 w-3.5" />
+					</a>
+				))}
+			</div>
+		</div>
+	</div>
+</article>

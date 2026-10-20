@@ -1,5 +1,5 @@
 ---
-import ProjectCard from './ProjectCard.astro';
+import ProjectEntry from './ProjectEntry.astro';
 import ReportSection from './ReportSection.astro';
 import { featuredProjects } from '../data/projects';
 import { es } from '../i18n/es';
@@ -12,12 +12,10 @@ import { es } from '../i18n/es';
 	title={es.sections.featuredProjects}
 	description="Proyectos web y Full Stack que muestran mi experiencia con aplicaciones, APIs y datos."
 >
-	<div class="grid gap-4 lg:grid-cols-3">
+	<div class="border-b border-rule-strong">
 		{
-			featuredProjects.map((project) => (
-				<div id={`proyecto-${project.slug}`} class="scroll-mt-24">
-					<ProjectCard project={project} />
-				</div>
+			featuredProjects.map((project, index) => (
+				<ProjectEntry project={project} index={index} />
 			))
 		}
 	</div>

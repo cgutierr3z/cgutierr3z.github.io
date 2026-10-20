@@ -16,6 +16,20 @@ export const es = {
 		errata: 'Fe de erratas',
 		case: 'Caso',
 		scope: 'Ámbito',
+		caseDetail: 'Detalle del caso',
+	},
+	serviceScopes: {
+		'web-development': 'Aplicaciones',
+		migration: 'Migraciones',
+		apis: 'Integraciones',
+		data: 'Datos',
+		support: 'Operación',
+		docker: 'Despliegue',
+	},
+	projectMeta: {
+		category: 'Categoría',
+		year: 'Año',
+		type: 'Tipo',
 	},
 	header: {
 		home: 'Inicio',
