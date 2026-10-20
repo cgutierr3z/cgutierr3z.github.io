@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Carlos Gutierrez">
-  <rect width="64" height="64" rx="14" fill="#0f172a" />
-  <text x="32" y="41" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#5eead4">CG</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Carlos Gutierrez">
+  <rect width="32" height="32" fill="#F2EEE4"/>
+  <rect x="2" y="2" width="28" height="28" fill="none" stroke="#15191B" stroke-width="2"/>
+  <rect x="2" y="24" width="28" height="6" fill="#A64B33"/>
+  <text x="16" y="19" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" fill="#15191B">CG</text>
 </svg>

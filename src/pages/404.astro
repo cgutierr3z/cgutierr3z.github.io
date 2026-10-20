@@ -1,33 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
 import { es } from '../i18n/es';
 ---
 
 <BaseLayout
-	title={`${es.notFound.title} | Carlos Gutierrez`}
+	title={`${es.notFound.title} | ${profile.name}`}
 	description={es.notFound.description}
 	noindex
 >
 	<main
 		id="main"
-		class="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-20"
+		class="report-shell flex min-h-screen flex-col justify-center py-16"
 	>
-		<p
-			class="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]"
-		>
-			404
-		</p>
-		<h1 class="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-			{es.notFound.title}
-		</h1>
-		<p class="mt-4 text-base leading-relaxed text-[var(--color-muted)]">
+		<div class="flex items-baseline justify-between gap-4 border-b border-rule pb-2">
+			<p class="data text-oxide">{es.report.errata}</p>
+			<p class="data text-ink-soft">404</p>
+		</div>
+
+		<div aria-hidden="true" class="mt-10 flex items-center gap-3">
+			<span class="h-px flex-1 bg-rule-strong"></span>
+			<span class="h-px w-12 bg-oxide"></span>
+		</div>
+
+		<h1 class="mt-8 max-w-4xl">{es.notFound.title}</h1>
+		<p class="prose-measure mt-4 text-ink-soft">
 			{es.notFound.description}
 		</p>
 		<a
 			href="/"
-			class="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hover)]"
+			class="mt-8 inline-flex w-fit items-center gap-2 bg-oxide px-5 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong"
 		>
 			{es.notFound.backHome}
 		</a>
+
+		<p class="data mt-16 border-t border-rule pt-3 text-ink-soft">
+			{profile.name} / {es.report.period}
+		</p>
 	</main>
 </BaseLayout>

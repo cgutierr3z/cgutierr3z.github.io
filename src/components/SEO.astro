@@ -13,6 +13,7 @@ const base = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(Astro.url.pathname, base).toString();
 const ogImage = image ? new URL(image, base).toString() : undefined;
 const isIndexable = !noindex;
+const imageAlt = `${profile.name}, ${profile.role}. Informe de gestión 2026.`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -45,10 +46,14 @@ const jsonLd = {
 {isIndexable && <meta property="og:url" content={canonical} />}
 <meta property="og:locale" content="es_ES" />
 {ogImage && <meta property="og:image" content={ogImage} />}
+{ogImage && <meta property="og:image:alt" content={imageAlt} />}
+{ogImage && <meta property="og:image:width" content="1200" />}
+{ogImage && <meta property="og:image:height" content="630" />}
 
 <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 {ogImage && <meta name="twitter:image" content={ogImage} />}
+{ogImage && <meta name="twitter:image:alt" content={imageAlt} />}
 
 {isIndexable && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

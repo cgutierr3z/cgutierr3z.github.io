@@ -113,7 +113,8 @@ export const es = {
   },
   footer: {
     rights: 'Todos los derechos reservados.',
-    builtWith: 'Hecho con Astro.',
+    builtWith: 'Sitio construido con Astro.',
+    typefaces: 'Tipografías: Archivo Variable y Fragment Mono.',
     index: 'Índice',
     indexLabel: 'Índice del informe',
     elsewhere: 'Enlaces',
