@@ -12,6 +12,7 @@ const { title, description, image, noindex = false } = Astro.props;
 const base = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(Astro.url.pathname, base).toString();
 const ogImage = image ? new URL(image, base).toString() : undefined;
+const isIndexable = !noindex;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -35,13 +36,13 @@ const jsonLd = {
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonical} />
+{isIndexable && <link rel="canonical" href={canonical} />}
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={canonical} />
+{isIndexable && <meta property="og:url" content={canonical} />}
 <meta property="og:locale" content="es_ES" />
 {ogImage && <meta property="og:image" content={ogImage} />}
 
@@ -50,4 +51,4 @@ const jsonLd = {
 <meta name="twitter:description" content={description} />
 {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+{isIndexable && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

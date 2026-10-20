@@ -13,6 +13,7 @@
 | **Fuente de verdad** | `docs/spec-001.md` |
 | **Agente de implementación** | `feature-coder` |
 | **Agente de auditoría** | `code-reviewer` |
+| **SPEC de seguimiento** | [`docs/spec-002.md`](spec-002.md) |
 | **Idioma del sitio** | Español (`es`) |
 
 > **Nota de confidencialidad:** el nombre del empleador actual/anterior es confidencial. No debe aparecer en este documento, en el código, en el contenido, en los tests, en los commits, en el README, en metadatos, en imágenes ni en el sitio generado. En el contenido se usará “Empresa confidencial” y una nota de divulgación limitada.
@@ -783,8 +784,8 @@ Workflow `.github/workflows/deploy.yml`:
 | T-016 | Completada | Imágenes (`og-image.png`, favicon SVG monograma) locales; `alt` en elementos visuales; sin imágenes remotas. |
 | T-017 | Completada | `tests/portfolio.spec.ts` (11 casos E2E) + `tests/a11y.spec.ts` (0 violaciones críticas/serias en `/` y `404.html`). |
 | T-018 | Completada | `.github/workflows/deploy.yml` con acciones fijadas, Bun 1.4.3, `check`, `build`, Playwright/axe en CI y deploy a Pages. Primera ejecución real exitosa: run `39369166799`; jobs `build` y `deploy` en verde. |
-| T-019 | Completada | Aprobados: email, rol “Desarrollador Full Stack”, “+50 aplicaciones”, “100–500 usuarios” y “2 tipos de CRM”; se eliminaron las referencias a los ~5 endpoints. Copy/roles de proyectos, CV saneado y educación aprobados. El CV público está en `public/cv/carlos-gutierrez-cv.pdf`, sin empleadores, teléfono ni dirección. LinkedIn revisado y aprobado por el propietario. |
-| T-020 | Completada con salvedad | Auditoría manual y smoke live sin bloqueantes: home/CV/404/sitemap/robots/OG correctos, axe 0 violaciones serias/críticas, 0 errores de consola y confidencialidad limpia. El subagente `code-reviewer` no estuvo disponible por cuenta/cuota; se sustituyó por revisión manual. |
+| T-019 | Completada | Aprobados: email, rol “Desarrollador Full Stack”, “+50 aplicaciones”, “100–500 usuarios” y “2 tipos de CRM”; se eliminaron las referencias a métricas no aprobadas. Copy/roles de proyectos, CV saneado y educación aprobados. El CV público está en `public/cv/carlos-gutierrez-cv.pdf`, sin empleadores, teléfono ni dirección. LinkedIn revisado y aprobado por el propietario. |
+| T-020 | Completada | Auditoría manual y smoke live sin bloqueantes. `code-reviewer` se ejecutó con override de modelo y reportó 0 bloqueantes, 4 medios y 7 bajos; los hallazgos accionables se gestionan en SPEC-002. |
 
 ---
 
@@ -854,9 +855,9 @@ Workflow `.github/workflows/deploy.yml`:
 - T-001 – T-020: completadas. Merge squash en `master` (`60cfbe2`).
 - Resultados locales: `bun install --frozen-lockfile` sin cambios; `bun run check` 0 errores; `bun run build` OK (2 páginas); `bunx playwright test` 12/12 OK; axe 0 violaciones críticas/serias; Lighthouse móvil final: performance 100, accessibility 100, best-practices 100, seo 100.
 - T-018: workflow de deploy con acciones fijadas, Bun, check/build, Playwright/axe y deploy a Pages. Run `39369166799` exitoso; jobs `build` y `deploy` en verde.
-- T-019: email, rol, “+50 aplicaciones”, “100–500 usuarios”, “2 tipos de CRM”, proyectos, CV saneado y educación aprobados. Se eliminaron las referencias a los ~5 endpoints. El CV público se genera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`. LinkedIn revisado y aprobado.
+- T-019: email, rol, “+50 aplicaciones”, “100–500 usuarios”, “2 tipos de CRM”, proyectos, CV saneado y educación aprobados. Se eliminaron las referencias a métricas no aprobadas. El CV público se genera con `bun run cv:generate` y se publica en `public/cv/carlos-gutierrez-cv.pdf`. LinkedIn revisado y aprobado.
 - T-020: validación live: home 200; CV 200 `application/pdf`; ruta inexistente 404 con `noindex`; sitemap, robots y OG 200; sin scroll horizontal de 360 a 1440 px; tema persistente; menú móvil accesible; 0 errores de consola; 0 violaciones axe críticas/serias. Confidencialidad limpia en árbol, historial, `dist/` y PDF.
-- `code-reviewer` no pudo ejecutarse por un error de cuenta/cuota; la auditoría se completó manualmente y con smoke live.
+- `code-reviewer` se ejecutó con override de modelo: 0 bloqueantes, 4 medios, 7 bajos y 2 informativos. Los hallazgos accionables se gestionan en SPEC-002.
 
 ---
 
@@ -880,7 +881,7 @@ Workflow `.github/workflows/deploy.yml`:
 - [x] `opencode.json` no está versionado.
 - [x] El workflow de GitHub Actions despliega correctamente.
 - [x] El README documenta setup, contenido y deploy.
-- [ ] `code-reviewer` no reporta defectos bloqueantes — no disponible por error de cuenta/cuota; sustituido por auditoría manual y smoke live.
+- [x] `code-reviewer` no reporta defectos bloqueantes; 4 medios y 7 bajos quedan gestionados en SPEC-002.
 - [x] El propietario aprueba el contenido final.
 
 ---
@@ -920,7 +921,7 @@ Workflow `.github/workflows/deploy.yml`:
 | 9 | Individual/equipo en proyectos académicos | Atribución | Sí | Aprobado con el copy actual; sin atribuciones a terceros |
 | 10 | Permiso para screenshots | Imágenes de proyectos | No; usar placeholder | Cerrado: no se usan screenshots |
 | 11 | Autoría del diagrama de `sparcv8-monocycle` | Atribución | No; omitir imagen | Cerrado: no se usa el diagrama |
-| 12 | Confirmación de publicación de métricas | Experiencia | Sí | Aprobado: 100–500 usuarios y 2 tipos de CRM; ~5 endpoints eliminados |
+| 12 | Confirmación de publicación de métricas | Experiencia | Sí | Aprobado: 100–500 usuarios y 2 tipos de CRM; métricas no aprobadas eliminadas |
 | 13 | Alcance de la confidencialidad (sitio, CV, LinkedIn) | Privacidad | Sí | CV: todos los empleadores anonimizados; LinkedIn revisado y aprobado |
 | 14 | Aprobación de tagline, bio y servicios | Copy final | Sí | Aprobado con el copy actual |
 | 15 | Formulario de contacto | Alcance | No; default no | Cerrado: no |
@@ -941,7 +942,7 @@ Mientras el propietario confirma cada ítem, la implementación aplica lo siguie
 - Items 3-5: foto, ubicación y disponibilidad omitidas; el hero usa el monograma `CG`.
 - Items 6-9: copy y roles actuales aprobados por el propietario; sin atribuciones a terceros.
 - Items 10-11: no se usan screenshots ni el diagrama de `sparcv8-monocycle`.
-- Item 12: aprobadas “100–500 usuarios” y “2 tipos de CRM”; se eliminaron las referencias a los ~5 endpoints del sitio y del CV.
+- Item 12: aprobadas “100–500 usuarios” y “2 tipos de CRM”; se eliminaron las referencias a métricas no aprobadas del sitio y del CV.
 - Item 13: el CV anonimiza todos los empleadores; LinkedIn fue revisado y aprobado por el propietario.
 - Item 18: educación incluida en el CV; idiomas omitidos; sin certificaciones publicadas.
 - Item 19: acento teal (`#0f766e`/`#2dd4bf`), tipografía por sistema (`ui-sans-serif`), logo monograma `CG`.
@@ -1010,7 +1011,7 @@ Twitter: summary_large_image
 - [x] Tagline, resumen y bio aprobados.
 - [x] Servicios aprobados.
 - [x] Experiencia anonimizada aprobada.
-- [x] Métricas aprobadas: 100–500 usuarios y 2 tipos de CRM; sin referencia a ~5 endpoints.
+- [x] Métricas aprobadas: 100–500 usuarios y 2 tipos de CRM; sin referencia a métricas no aprobadas.
 - [x] Descripciones y roles de los 8 proyectos aprobados.
 - [x] Etiquetas de tipo de proyecto aprobadas.
 - [x] Enlaces de demo/repositorio verificados.

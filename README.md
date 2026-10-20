@@ -4,6 +4,7 @@ Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Presenta servi
 
 - **Sitio:** https://cgutierr3z.github.io/
 - **Especificación:** [`docs/spec-001.md`](docs/spec-001.md)
+- **Endurecimiento:** [`docs/spec-002.md`](docs/spec-002.md)
 - **Estado:** MVP desplegado y validado en GitHub Pages
 
 ## Stack
@@ -18,6 +19,7 @@ Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Presenta servi
 
 - Bun 1.4 o superior
 - Node.js 22.22 o superior (requisito de Astro)
+- `poppler-utils` (`pdfinfo`, `pdftotext`) para la verificación automatizada del CV
 
 ## Desarrollo
 
@@ -45,6 +47,7 @@ El servidor de desarrollo estará disponible en `http://localhost:4321`.
 ### Tests
 
 ```bash
+# Debian/Ubuntu: sudo apt-get install poppler-utils
 bunx playwright install chromium
 bun run build
 bun run test:e2e
@@ -75,6 +78,8 @@ Las cadenas principales de interfaz se encuentran en `src/i18n/es.ts`; parte del
 
 El despliegue se realiza con GitHub Actions al hacer merge a `master`. El workflow ejecuta `bun run check`, `bun run build`, Playwright/axe y solo publica si todo pasa.
 
+Los pull requests ejecutan el workflow `CI` con los mismos checks, sin permisos de publicación. Las acciones están fijadas a commits completos.
+
 Configuración en GitHub:
 
 1. **Settings → Pages → Source: GitHub Actions** (ya configurado).
@@ -84,7 +89,7 @@ Despliegue validado:
 
 - Workflow `Deploy to GitHub Pages`: run `39369166799`, jobs `build` y `deploy` en verde.
 - Home, CV, 404, sitemap, robots y OG image responden correctamente.
-- Smoke live: 8 secciones, tema persistente, menú móvil accesible, 0 errores de consola y 0 violaciones axe críticas/serias.
+- Smoke live: 8 secciones, tema persistente, menú móvil accesible, 0 errores de consola y 0 violaciones axe.
 
 ## Confidencialidad
 

@@ -1,4 +1,9 @@
 export const es = {
+  header: {
+    home: 'Inicio',
+    mainNav: 'Navegación principal',
+    mobileNav: 'Navegación móvil',
+  },
   nav: {
     services: 'Servicios',
     projects: 'Proyectos',
@@ -45,10 +50,23 @@ export const es = {
     achievements: 'Logros',
     responsibilities: 'Responsabilidades',
   },
+  contact: {
+    eyebrow: 'Contacto',
+    title: 'Hablemos',
+    description:
+      '¿Tienes un proyecto o una oportunidad? Estoy abierto a conversar.',
+    heading: 'Construyamos algo juntos',
+    bodyWithEmail:
+      'Puedes escribirme por email o LinkedIn, o revisar mi trabajo en GitHub. Respondo a oportunidades laborales y proyectos de desarrollo.',
+    bodyWithoutEmail:
+      'Puedes escribirme por LinkedIn o revisar mi trabajo en GitHub. Respondo a oportunidades laborales y proyectos de desarrollo.',
+  },
   theme: {
     toggle: 'Cambiar tema',
     light: 'Tema claro',
     dark: 'Tema oscuro',
+    switchToLight: 'Cambiar a tema claro',
+    switchToDark: 'Cambiar a tema oscuro',
   },
   a11y: {
     skipToContent: 'Saltar al contenido',

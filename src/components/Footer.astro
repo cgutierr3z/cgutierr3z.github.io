@@ -22,6 +22,7 @@ const year = new Date().getFullYear();
 				class="transition-colors hover:text-[var(--color-text)]"
 			>
 				GitHub
+				<span class="sr-only"> {es.a11y.externalLink}</span>
 			</a>
 			<a
 				href={profile.linkedin}
@@ -30,6 +31,7 @@ const year = new Date().getFullYear();
 				class="transition-colors hover:text-[var(--color-text)]"
 			>
 				LinkedIn
+				<span class="sr-only"> {es.a11y.externalLink}</span>
 			</a>
 			<a
 				href="https://github.com/cgutierr3z/cgutierr3z.github.io"
@@ -37,7 +39,8 @@ const year = new Date().getFullYear();
 				rel="noopener noreferrer"
 				class="transition-colors hover:text-[var(--color-text)]"
 			>
-				Repositorio
+				{es.labels.repo}
+				<span class="sr-only"> {es.a11y.externalLink}</span>
 			</a>
 		</div>
 
