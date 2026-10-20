@@ -5,7 +5,7 @@
 | **ID** | SPEC-001 |
 | **Versión** | 1.2 — Implementado, desplegado y validado |
 | **Fecha** | 2026-10-19 y 2026-10-20 |
-| **Estado** | Aprobado por el propietario · T-001 – T-020 completadas; sitio desplegado |
+| **Estado** | Aprobado por el propietario · T-001 – T-020 completadas; sitio desplegado; SPEC-002 implementada y desplegada |
 | **Repositorio** | https://github.com/cgutierr3z/cgutierr3z.github.io |
 | **Sitio objetivo** | https://cgutierr3z.github.io/ |
 | **Rama de implementación** | `master` (mergeada desde `feat/spec-001-portfolio`) |
