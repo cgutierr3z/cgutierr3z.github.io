@@ -66,7 +66,7 @@ El contenido se centraliza en `src/data/` para poder actualizarlo sin modificar 
 - `experience.ts`: experiencia laboral.
 - `technologies.ts`: stack agrupado.
 
-Las cadenas de interfaz se encuentran en `src/i18n/es.ts`. El MVP está en español y la estructura queda preparada para añadir inglés.
+Las cadenas principales de interfaz se encuentran en `src/i18n/es.ts`; parte del copy de secciones vive en los componentes. El MVP está en español y la estructura permite extraer el resto al añadir inglés.
 
 ## Despliegue
 

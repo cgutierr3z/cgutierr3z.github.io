@@ -785,7 +785,7 @@ Workflow `.github/workflows/deploy.yml`:
 | T-017 | Completada | `tests/portfolio.spec.ts` (11 casos E2E) + `tests/a11y.spec.ts` (0 violaciones críticas/serias en `/` y `404.html`). |
 | T-018 | Completada | `.github/workflows/deploy.yml` con acciones fijadas, Bun 1.4.3, `check`, `build`, Playwright/axe en CI y deploy a Pages. Primera ejecución real pendiente. |
 | T-019 | Pendiente | Email presente en `profile.ts` (añadido por el propietario). CV local recibido, pero contiene el nombre del empleador y datos de contacto; no es apto para publicar. Faltan foto y confirmaciones de copy/métricas. Content gate bloquea deploy. |
-| T-020 | Pendiente | Pendiente de T-019 y de la auditoría final de confidencialidad. |
+| T-020 | Pendiente | Auditoría manual de código completada; el subagente `code-reviewer` no estuvo disponible por cuota. Pendiente T-019 y la auditoría final de confidencialidad. |
 
 ---
 
