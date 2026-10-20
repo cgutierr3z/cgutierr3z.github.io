@@ -5,7 +5,7 @@ Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Presenta servi
 - **Sitio:** https://cgutierr3z.github.io/
 - **Especificación:** [`docs/spec-001.md`](docs/spec-001.md)
 - **Endurecimiento:** [`docs/spec-002.md`](docs/spec-002.md)
-- **Estado:** MVP desplegado y validado en GitHub Pages
+- **Estado:** MVP desplegado; SPEC-002 implementada y validada en GitHub Pages
 
 ## Stack
 
@@ -76,7 +76,7 @@ Las cadenas principales de interfaz se encuentran en `src/i18n/es.ts`; parte del
 
 ## Despliegue
 
-El despliegue se realiza con GitHub Actions al hacer merge a `master`. El workflow ejecuta `bun run check`, `bun run build`, Playwright/axe y solo publica si todo pasa.
+El despliegue se realiza con GitHub Actions al hacer merge a `master`. El workflow ejecuta `bun run check`, `bun run build`, Playwright/axe, la verificación del PDF y solo publica si todo pasa.
 
 Los pull requests ejecutan el workflow `CI` con los mismos checks, sin permisos de publicación. Las acciones están fijadas a commits completos.
 
@@ -87,9 +87,12 @@ Configuración en GitHub:
 
 Despliegue validado:
 
-- Workflow `Deploy to GitHub Pages`: run `39369166799`, jobs `build` y `deploy` en verde.
+- Workflow `Deploy to GitHub Pages`: run `39375852568`, jobs `build` y `deploy` en verde.
+- CI de PR #2: run `39375636236` en verde; Playwright/axe 19/19.
 - Home, CV, 404, sitemap, robots y OG image responden correctamente.
+- CV live: `Tagged: yes`, una página, Letter y copy aprobado.
 - Smoke live: 8 secciones, tema persistente, menú móvil accesible, 0 errores de consola y 0 violaciones axe.
+- Lighthouse local: 100/100/100/100.
 
 ## Confidencialidad
 

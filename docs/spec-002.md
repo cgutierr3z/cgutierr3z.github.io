@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | **ID** | SPEC-002 |
-| **Versión** | 1.1 — Implementación |
+| **Versión** | 1.2 — Cierre |
 | **Fecha** | 2026-10-20 |
-| **Estado** | Aprobado; T-001 – T-011 completadas; T-012 – T-013 pendientes |
+| **Estado** | Implementado y desplegado; T-001 – T-013 completadas |
 | **Repositorio** | https://github.com/cgutierr3z/cgutierr3z.github.io |
 | **Sitio** | https://cgutierr3z.github.io/ |
 | **Base** | `master` @ `f30ce3e` |
@@ -410,7 +410,7 @@ Ajustar `tests/a11y.spec.ts`:
 | T-012 | Abrir PR, revisar, mergear y desplegar. | — | T-011 | CI y deploy en verde; sitio live validado. |
 | T-013 | Cerrar SPEC-002 y actualizar SPEC-001. | — | T-012 | Estado final documentado; sin pendientes. |
 
-**Estado de ejecución:** T-001 – T-011 completadas. T-012 – T-013 se cierran después del merge y la validación live.
+**Estado de ejecución:** T-001 – T-013 completadas. Implementación integrada en `master` y validada en el sitio live.
 
 ### 7.1 Registro de ejecución
 
@@ -427,8 +427,8 @@ Ajustar `tests/a11y.spec.ts`:
 | T-009 | Completada | `bunx playwright test --reporter=line`: 19/19. Incluye verificación del PDF (texto, etiquetado, una página), CV obligatorio, SEO de 404, enlaces accesibles, proyectos y workflows. |
 | T-010 | Completada | SPEC-001 actualizada; búsqueda de la métrica retirada limpia; ejecución de `code-reviewer` y hallazgos documentados. |
 | T-011 | Completada | `astro check`: 0 errores; build correcto; Lighthouse local: 100/100/100/100; `pdfinfo`: `Tagged: yes`, 1 página, Letter; sin imágenes ni datos sensibles. |
-| T-012 | Pendiente | Abrir PR, validar CI, mergear y desplegar en GitHub Pages. |
-| T-013 | Pendiente | Validar el sitio live y cerrar SPEC-002/SPEC-001. |
+| T-012 | Completada | PR #2: CI run `39375636236` en verde; squash merge `4fd2af6`; deploy run `39375852568` con `build` y `deploy` en verde. |
+| T-013 | Completada | Live: home 200, 404 404 con `noindex`, CV 200 `application/pdf`; PDF `Tagged: yes`, 1 página, Letter; sin métrica retirada ni datos sensibles; sitemap, robots y OG 200. |
 
 La revisión de implementación detectó dos brechas medias: faltaba una comprobación automática del contenido del PDF y la migración del generador había cambiado el copy aprobado del CV. Ambas se cerraron antes del merge: `tests/cv.spec.ts` verifica el texto y los metadatos del PDF, y `src/data/cv.ts` conserva el copy aprobado. También se corrigieron el fallback de etiquetas de proyectos, la validación de permisos globales y la separación del anuncio de nueva pestaña en el Hero.
 
@@ -475,8 +475,8 @@ La revisión de implementación detectó dos brechas medias: faltaba una comprob
 - [x] Los enlaces de proyectos incluyen el nombre del proyecto.
 - [x] El tema claro/oscuro persiste.
 - [x] El menú móvil abre, cierra con Escape y devuelve el foco.
-- [ ] La 404 live responde 404 y conserva `noindex`.
-- [ ] El workflow de deploy está en verde.
+- [x] La 404 live responde 404 y conserva `noindex`.
+- [x] El workflow de deploy está en verde (run `39375852568`).
 - [x] No hay datos confidenciales en árbol, historial, `dist/` ni PDF.
 - [x] No se modificaron las métricas aprobadas.
 
@@ -485,7 +485,7 @@ La revisión de implementación detectó dos brechas medias: faltaba una comprob
 - [x] `docs/spec-002.md` actualizado con el registro de tareas.
 - [x] `docs/spec-001.md` sin la métrica de endpoints retirada.
 - [x] `docs/spec-001.md` refleja que `code-reviewer` se ejecutó y no reportó bloqueantes.
-- [ ] `README.md` documenta el CI de PR y el estado del deploy.
+- [x] `README.md` documenta el CI de PR y el estado del deploy.
 - [x] Checklist de contenido y checklist global sin contradicciones.
 
 ---
