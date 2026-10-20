@@ -82,7 +82,7 @@ Configuración requerida en GitHub:
 
 El nombre de la empresa del empleador actual/anterior es confidencial. No debe incluirse en el código, el contenido, los tests, los commits, los metadatos, las imágenes ni el sitio generado. En la experiencia se muestra como **“Empresa confidencial”**.
 
-Antes de publicar un CV, revisar que no incluya el nombre de la empresa, teléfono ni dirección. El CV local en `assets/` está ignorado por Git hasta completar esa revisión.
+Antes de publicar un CV, revisar que no incluya el nombre de la empresa, teléfono ni dirección. El CV local no se versiona ni se publica hasta completar esa revisión; las rutas `assets/CV_ATS_2026_Carlos_Gutierrez.pdf` y `public/assets/CV_ATS_2026_Carlos_Gutierrez.pdf` están ignoradas por Git.
 
 ## Configuración local
 
