@@ -1,97 +1,119 @@
 ---
 import Icon from './Icon.astro';
+import MetricBand from './MetricBand.astro';
 import { profile } from '../data/profile';
 import { featuredProjects } from '../data/projects';
 import { es } from '../i18n/es';
 ---
 
 <section id="inicio" aria-labelledby="hero-title">
-	<div class="report-shell pb-16 pt-14 sm:pt-20">
-		<p class="data text-ink-soft">
-			{es.report.kicker} / {es.report.period}
-		</p>
-
-		<h1 id="hero-title" class="mt-6 max-w-4xl">
-			{profile.name}<span class="mt-3 block text-[0.42em] font-medium leading-tight tracking-[-0.01em] text-ink-soft">{profile.role}</span>
-		</h1>
-
-		<p class="prose-measure mt-8 text-xl font-medium leading-snug">
-			{profile.tagline}
-		</p>
-		<p class="prose-measure mt-4 text-ink-soft">
-			{profile.summary}
-		</p>
-
-		<div class="mt-8 flex flex-wrap items-center gap-3">
-			<a
-				href="#proyectos"
-				class="inline-flex items-center gap-2 bg-oxide px-5 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong"
-			>
-				{es.ctas.projects}
-				<Icon name="arrow" class="h-4 w-4" />
-			</a>
-			{
-				profile.cvUrl && (
-					<a
-						href={profile.cvUrl}
-						download
-						class="inline-flex items-center gap-2 border border-rule-strong px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-oxide"
-					>
-						{es.ctas.cv}
-					</a>
-				)
-			}
+	<div class="report-shell pb-6 pt-5 sm:pb-10 sm:pt-8">
+		<div class="flex items-baseline justify-between gap-4 border-b border-rule pb-2">
+			<p class="data text-ink-soft">
+				{es.report.kicker} / {es.report.period}
+			</p>
+			<p class="data hidden text-ink-soft sm:block">{profile.role}</p>
 		</div>
 
-		<ul class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-soft">
-			<li>
-				<a
-					href={profile.github}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="link-underline inline-flex items-center gap-1.5"
-				>
-					{es.ctas.github}
-					<Icon name="external" class="h-3.5 w-3.5" />
-					<span class="sr-only"> {es.a11y.externalLink}</span>
-				</a>
-			</li>
-			<li>
-				<a
-					href={profile.linkedin}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="link-underline inline-flex items-center gap-1.5"
-				>
-					{es.ctas.linkedin}
-					<Icon name="external" class="h-3.5 w-3.5" />
-					<span class="sr-only"> {es.a11y.externalLink}</span>
-				</a>
-			</li>
-			<li>
-				<a href="#contacto" class="link-underline">{es.nav.contact}</a>
-			</li>
-		</ul>
+		<div class="mt-6 grid gap-8 sm:mt-7 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-start lg:gap-16">
+			<div>
+				<h1 id="hero-title">
+					{profile.name}<span class="mt-1.5 block text-[0.4em] font-medium leading-tight tracking-[-0.015em] text-ink-soft sm:mt-3">
+						{profile.role}
+					</span>
+				</h1>
 
-		<div class="mt-12 border-t border-rule pt-4">
-			<p class="data text-ink-soft">{es.report.selectedWork}</p>
-			<ol class="mt-3 grid gap-2 sm:grid-cols-3">
-				{
-					featuredProjects.map((project, index) => (
-						<li>
+				<p class="prose-measure mt-5 text-lg font-medium leading-snug sm:mt-8 sm:text-xl">
+					{profile.tagline}
+				</p>
+				<p class="prose-measure mt-3 text-[0.95rem] leading-relaxed text-ink-soft sm:text-base">
+					{profile.summary}
+				</p>
+
+				<div class="mt-5 flex flex-wrap items-center gap-3 sm:mt-8">
+					<a
+						href="#proyectos"
+						class="inline-flex items-center gap-2 bg-oxide px-5 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-oxide-strong"
+					>
+						{es.ctas.projects}
+						<Icon name="arrow" class="h-4 w-4" />
+					</a>
+					{
+						profile.cvUrl && (
 							<a
-								href="#proyectos"
-								class="flex items-baseline gap-3 border border-rule px-4 py-3 transition-colors hover:border-oxide"
+								href={profile.cvUrl}
+								download
+								class="inline-flex items-center gap-2 border border-rule-strong px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-oxide"
 							>
-								<span class="data text-ink-soft">
-									{`0${index + 1}`}
-								</span>
-								<span class="font-semibold">{project.title}</span>
+								{es.ctas.cv}
 							</a>
-						</li>
-					))
-				}
-			</ol>
+						)
+					}
+				</div>
+
+				<ul class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-soft sm:mt-5">
+					<li>
+						<a
+							href={profile.github}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="link-underline inline-flex items-center gap-1.5 hover:text-ink"
+						>
+							{es.ctas.github}
+							<Icon name="external" class="h-3.5 w-3.5" />
+							<span class="sr-only"> {es.a11y.externalLink}</span>
+						</a>
+					</li>
+					<li>
+						<a
+							href={profile.linkedin}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="link-underline inline-flex items-center gap-1.5 hover:text-ink"
+						>
+							{es.ctas.linkedin}
+							<Icon name="external" class="h-3.5 w-3.5" />
+							<span class="sr-only"> {es.a11y.externalLink}</span>
+						</a>
+					</li>
+					<li>
+						<a href="#contacto" class="link-underline hover:text-ink">
+							{es.nav.contact}
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<aside aria-labelledby="hero-index-title" class="lg:pt-2">
+				<div class="flex items-baseline justify-between gap-4 border-t border-rule-strong pt-3">
+					<h2 id="hero-index-title" class="data text-oxide">
+						{es.report.selectedWork}
+					</h2>
+					<p class="data text-ink-soft">01–03</p>
+				</div>
+				<ol class="mt-3">
+					{
+						featuredProjects.map((project, index) => (
+							<li class="border-b border-rule">
+								<a
+									href={`#proyecto-${project.slug}`}
+									class="group grid grid-cols-[2.25rem_minmax(0,1fr)_auto] items-baseline gap-3 py-2 sm:py-2.5"
+								>
+									<span class="data text-ink-soft">
+										{`0${index + 1}`}
+									</span>
+									<span class="font-semibold leading-snug transition-colors group-hover:text-oxide">
+										{project.title}
+									</span>
+									<span class="data text-ink-soft">{project.year}</span>
+								</a>
+							</li>
+						))
+					}
+				</ol>
+			</aside>
 		</div>
 	</div>
+
+	<MetricBand />
 </section>

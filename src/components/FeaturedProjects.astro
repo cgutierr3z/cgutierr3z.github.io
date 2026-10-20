@@ -15,7 +15,9 @@ import { es } from '../i18n/es';
 	<div class="grid gap-4 lg:grid-cols-3">
 		{
 			featuredProjects.map((project) => (
-				<ProjectCard project={project} />
+				<div id={`proyecto-${project.slug}`} class="scroll-mt-24">
+					<ProjectCard project={project} />
+				</div>
 			))
 		}
 	</div>
