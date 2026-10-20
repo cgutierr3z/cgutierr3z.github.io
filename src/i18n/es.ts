@@ -88,6 +88,8 @@ export const es = {
   contact: {
     eyebrow: 'Contacto',
     title: 'Hablemos',
+    emailLabel: 'Email',
+    alsoAt: 'También en',
     description:
       '¿Tienes un proyecto o una oportunidad? Estoy abierto a conversar.',
     heading: 'Construyamos algo juntos',
@@ -121,6 +123,20 @@ export const es = {
     description:
       'La página que buscas no existe o ha cambiado de ubicación.',
     backHome: 'Volver al inicio',
+  },
+  about: {
+    paragraphOne:
+      'Soy Carlos Gutierrez, desarrollador Full Stack. He trabajado en aplicaciones empresariales, migración de formularios a React + Form.io, integración de APIs y procesos de migración de datos.',
+    paragraphTwo:
+      'Me enfoco en construir soluciones mantenibles y acompañar su evolución: desde el desarrollo y la integración hasta el soporte de aplicaciones en producción.',
+    principlesLabel: 'Principios de trabajo',
+    principles: [
+      'Aplicaciones mantenibles y estables',
+      'Migraciones sin interrumpir la operación',
+      'APIs, datos y soporte en producción',
+      'Trabajo colaborativo con Scrum',
+    ],
+    signature: 'Carlos Gutierrez / 2026',
   },
 };
 

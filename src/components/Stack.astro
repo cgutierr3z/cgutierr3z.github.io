@@ -11,21 +11,24 @@ import { es } from '../i18n/es';
 	title={es.sections.stack}
 	description="Tecnologías con las que he trabajado en aplicaciones empresariales, integraciones y procesos de datos."
 >
-	<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+	<div class="border-t border-rule-strong">
 		{
 			technologies.map((group) => (
-				<article class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-					<h3 class="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)]">
-						{group.category}
-					</h3>
-					<ul class="mt-4 flex flex-wrap gap-2">
-						{group.items.map((technology) => (
-							<li class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-2.5 py-1 text-sm text-[var(--color-text)]">
+				<div class="grid gap-3 border-b border-rule py-5 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-8">
+					<h3 class="text-lg">{group.category}</h3>
+					<ul class="flex flex-wrap gap-x-3 gap-y-1">
+						{group.items.map((technology, index) => (
+							<li class="text-sm text-ink-soft">
 								{technology}
+								{index < group.items.length - 1 && (
+									<span aria-hidden="true" class="ml-3 text-rule-strong">
+										/
+									</span>
+								)}
 							</li>
 						))}
 					</ul>
-				</article>
+				</div>
 			))
 		}
 	</div>

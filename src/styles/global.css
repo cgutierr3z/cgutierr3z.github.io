@@ -228,6 +228,12 @@ p {
   color: var(--paper);
 }
 
+/* Sobre campos de color, el foco se dibuja con el color de señal. */
+.field-patina,
+.field-oxide {
+  --focus: var(--on-signal);
+}
+
 /* Enlaces de texto del sistema. */
 .link-underline {
   text-decoration-line: underline;
