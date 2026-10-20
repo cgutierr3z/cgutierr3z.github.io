@@ -19,7 +19,7 @@ const navItems = [
 		class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6"
 	>
 		<a href="/" class="flex items-center gap-3">
-			<span class="sr-only">Inicio</span>
+			<span class="sr-only">{es.header.home}</span>
 			<span
 				class="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-text)] text-sm font-bold text-[var(--color-bg)]"
 				aria-hidden="true"
@@ -33,7 +33,7 @@ const navItems = [
 
 		<nav
 			class="hidden items-center gap-6 md:flex"
-			aria-label="Navegación principal"
+			aria-label={es.header.mainNav}
 		>
 			{
 				navItems.map((item) => (
@@ -62,6 +62,8 @@ const navItems = [
 				aria-label={es.a11y.openMenu}
 				aria-controls="mobile-menu"
 				aria-expanded="false"
+				data-open-label={es.a11y.openMenu}
+				data-close-label={es.a11y.closeMenu}
 			>
 				<Icon name="menu" class="h-5 w-5" />
 			</button>
@@ -75,7 +77,7 @@ const navItems = [
 	>
 		<nav
 			class="mx-auto max-w-6xl px-6 py-4"
-			aria-label="Navegación móvil"
+			aria-label={es.header.mobileNav}
 		>
 			<ul class="flex flex-col gap-1">
 				{
@@ -108,11 +110,13 @@ const navItems = [
 		if (!button || !menu) return;
 
 		const desktop = window.matchMedia('(min-width: 768px)');
+		const openLabel = button.dataset.openLabel || 'Abrir menú';
+		const closeLabel = button.dataset.closeLabel || 'Cerrar menú';
 
 		const setOpen = (open) => {
 			menu.hidden = !open;
 			button.setAttribute('aria-expanded', String(open));
-			button.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+			button.setAttribute('aria-label', open ? closeLabel : openLabel);
 		};
 
 		button.addEventListener('click', () => {

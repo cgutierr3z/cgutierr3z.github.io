@@ -68,10 +68,10 @@ const { project, compact = false } = Astro.props;
 					href={link.url}
 					target="_blank"
 					rel="noopener noreferrer"
+					aria-label={`${link.label} de ${project.title}. ${es.a11y.externalLink}`}
 					class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-accent)] transition-colors hover:text-[var(--color-accent-hover)]"
 				>
 					{link.label}
-					<span class="sr-only"> {es.a11y.externalLink}</span>
 					<Icon name="external" class="h-3.5 w-3.5" />
 				</a>
 			))

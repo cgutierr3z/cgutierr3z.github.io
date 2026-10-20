@@ -4,6 +4,7 @@ Sitio personal de **Carlos Gutierrez**, desarrollador Full Stack. Presenta servi
 
 - **Sitio:** https://cgutierr3z.github.io/
 - **Especificación:** [`docs/spec-001.md`](docs/spec-001.md)
+- **Endurecimiento:** [`docs/spec-002.md`](docs/spec-002.md)
 - **Estado:** MVP desplegado y validado en GitHub Pages
 
 ## Stack
@@ -74,6 +75,8 @@ Las cadenas principales de interfaz se encuentran en `src/i18n/es.ts`; parte del
 ## Despliegue
 
 El despliegue se realiza con GitHub Actions al hacer merge a `master`. El workflow ejecuta `bun run check`, `bun run build`, Playwright/axe y solo publica si todo pasa.
+
+Los pull requests ejecutan el workflow `CI` con los mismos checks, sin permisos de publicación. Las acciones están fijadas a commits completos.
 
 Configuración en GitHub:
 

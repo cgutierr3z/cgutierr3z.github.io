@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | **ID** | SPEC-002 |
-| **Versión** | 1.0 — Propuesta |
+| **Versión** | 1.1 — Implementación |
 | **Fecha** | 2026-10-20 |
-| **Estado** | Pendiente de aprobación |
+| **Estado** | Aprobado; T-001 – T-011 completadas; T-012 – T-013 pendientes |
 | **Repositorio** | https://github.com/cgutierr3z/cgutierr3z.github.io |
 | **Sitio** | https://cgutierr3z.github.io/ |
 | **Base** | `master` @ `f30ce3e` |
@@ -410,7 +410,25 @@ Ajustar `tests/a11y.spec.ts`:
 | T-012 | Abrir PR, revisar, mergear y desplegar. | — | T-011 | CI y deploy en verde; sitio live validado. |
 | T-013 | Cerrar SPEC-002 y actualizar SPEC-001. | — | T-012 | Estado final documentado; sin pendientes. |
 
-**Estado inicial:** todas las tareas en `Pendiente`.
+**Estado de ejecución:** T-001 – T-011 completadas. T-012 – T-013 se cierran después del merge y la validación live.
+
+### 7.1 Registro de ejecución
+
+| ID | Estado | Evidencia |
+|---|---|---|
+| T-001 | Completada | Aprobación del propietario; rama `feat/spec-002-hardening`; SPEC-002 registrada en `9ad3d04`. |
+| T-002 | Completada | Cuatro acciones fijadas a SHA completo; `build` solo con `contents: read`; `deploy` con `pages: write` e `id-token: write`; invariantes en `tests/workflow.spec.ts`. El deploy real se valida en T-012. |
+| T-003 | Completada | `.github/workflows/ci.yml` se ejecuta en `pull_request`, usa las mismas acciones fijadas y no tiene permisos ni pasos de publicación. |
+| T-004 | Completada | `dist/404.html` sin canonical, `og:url` ni JSON-LD; la home conserva las tres señales. Cubierto por `tests/portfolio.spec.ts`. |
+| T-005 | Completada | `pdfinfo`: `Tagged: yes`, `Pages: 1`, `Page size: 612 x 792 pts (letter)`; `pdfimages -list` sin imágenes; texto sin datos sensibles. |
+| T-006 | Completada | Contacto y footer anuncian “Abre en una nueva pestaña”; los cuatro enlaces de proyectos incluyen el nombre del proyecto; tests en verde. |
+| T-007 | Completada | Nuevo `scripts/generate-cv.ts`; datos exclusivos en `src/data/cv.ts`; experiencia, stack y proyectos importados desde `src/data`; `scripts/generate-cv.mjs` retirado; script `cv:generate` con Bun. |
+| T-008 | Completada | Textos de menú, tema y contacto centralizados en `src/i18n/es.ts`; `Header` y `ThemeToggle` usan atributos `data-*` para sus etiquetas dinámicas. |
+| T-009 | Completada | `bunx playwright test --reporter=line`: 18/18. Incluye CV obligatorio, SEO de 404, enlaces accesibles, proyectos y workflows. |
+| T-010 | Completada | SPEC-001 actualizada; búsqueda de la métrica retirada limpia; ejecución de `code-reviewer` y hallazgos documentados. |
+| T-011 | Completada | `astro check`: 0 errores; build correcto; Lighthouse local: 100/100/100/100; PDF etiquetado de una página. |
+| T-012 | Pendiente | Abrir PR, validar CI, mergear y desplegar en GitHub Pages. |
+| T-013 | Pendiente | Validar el sitio live y cerrar SPEC-002/SPEC-001. |
 
 ---
 
@@ -595,7 +613,7 @@ curl -sS -o /dev/null -w '%{http_code}\n' \
 
 | Rol | Nombre | Decisión | Fecha |
 |---|---|---|---|
-| Propietario | Carlos Gutierrez | Pendiente | — |
-| Arquitecto | — | Pendiente | — |
+| Propietario | Carlos Gutierrez | Aprobado | 2026-10-20 |
+| Arquitecto | — | Revisado | 2026-10-20 |
 
 Una vez aprobado, la implementación se realiza en `feat/spec-002-hardening` y se integra mediante pull request. No se modifica `master` directamente ni se publica hasta que el CI y la validación live estén en verde.

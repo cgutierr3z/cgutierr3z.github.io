@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { es } from '../i18n/es';
 
 interface Props {
 	class?: string;
@@ -15,8 +16,10 @@ const { class: className = '' } = Astro.props;
 		'theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-text)]',
 		className,
 	]}
-	aria-label="Cambiar tema"
+	aria-label={es.theme.toggle}
 	aria-pressed="false"
+	data-light-label={es.theme.switchToLight}
+	data-dark-label={es.theme.switchToDark}
 >
 	<Icon name="sun" class="theme-icon-sun h-5 w-5" />
 	<Icon name="moon" class="theme-icon-moon h-5 w-5" />
@@ -28,14 +31,13 @@ const { class: className = '' } = Astro.props;
 		if (buttons.length === 0) return;
 
 		const root = document.documentElement;
+		const lightLabel = buttons[0].dataset.lightLabel || 'Cambiar a tema claro';
+		const darkLabel = buttons[0].dataset.darkLabel || 'Cambiar a tema oscuro';
 
 		const updateLabels = () => {
 			const isDark = root.dataset.theme === 'dark';
 			buttons.forEach((button) => {
-				button.setAttribute(
-					'aria-label',
-					isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro',
-				);
+				button.setAttribute('aria-label', isDark ? lightLabel : darkLabel);
 				button.setAttribute('aria-pressed', String(isDark));
 			});
 		};

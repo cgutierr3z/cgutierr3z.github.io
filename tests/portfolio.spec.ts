@@ -103,23 +103,58 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     }
   });
 
-  test('el enlace de CV solo aparece si existe y apunta a un PDF', async ({ page }) => {
+  test('el enlace de CV existe y apunta a un PDF descargable', async ({ page }) => {
     await page.goto('/');
 
     const cvLinks = page.getByRole('link', { name: /Descargar CV/i });
-    const count = await cvLinks.count();
+    await expect(cvLinks).toHaveCount(1);
+    await expect(cvLinks.first()).toHaveAttribute('href', /\.pdf$/i);
+    await expect(cvLinks.first()).toHaveAttribute('download', '');
 
-    if (count > 0) {
-      await expect(cvLinks.first()).toHaveAttribute('href', /\.pdf$/i);
-      await expect(cvLinks.first()).toHaveAttribute('download', '');
+    const href = await cvLinks.first().getAttribute('href');
+    expect(href).toBeTruthy();
+    const response = await page.request.get(
+      new URL(href!, page.url()).toString(),
+    );
+    expect(response.ok()).toBe(true);
+    expect(response.headers()['content-type']).toContain('application/pdf');
+  });
 
-      const href = await cvLinks.first().getAttribute('href');
-      expect(href).toBeTruthy();
-      const response = await page.request.get(
-        new URL(href!, page.url()).toString(),
-      );
-      expect(response.ok()).toBe(true);
-      expect(response.headers()['content-type']).toContain('application/pdf');
+  test('los enlaces externos anuncian la nueva pestaña', async ({ page }) => {
+    await page.goto('/');
+
+    const contact = page.locator('#contacto');
+    await expect(
+      contact.getByRole('link', { name: /GitHub/ }),
+    ).toHaveAccessibleName(/Abre en una nueva pestaña/);
+    await expect(
+      contact.getByRole('link', { name: /LinkedIn/ }),
+    ).toHaveAccessibleName(/Abre en una nueva pestaña/);
+
+    const footer = page.locator('footer');
+    await expect(
+      footer.getByRole('link', { name: /GitHub/ }),
+    ).toHaveAccessibleName(/Abre en una nueva pestaña/);
+    await expect(
+      footer.getByRole('link', { name: /LinkedIn/ }),
+    ).toHaveAccessibleName(/Abre en una nueva pestaña/);
+    await expect(
+      footer.getByRole('link', { name: /Repositorio/ }),
+    ).toHaveAccessibleName(/Abre en una nueva pestaña/);
+  });
+
+  test('los enlaces de proyectos incluyen el nombre del proyecto', async ({ page }) => {
+    await page.goto('/');
+
+    const projectLinks = page.locator('section#proyectos a[target="_blank"]');
+    await expect(projectLinks).toHaveCount(4);
+
+    const labels = await projectLinks.evaluateAll((links) =>
+      links.map((link) => link.getAttribute('aria-label') ?? ''),
+    );
+
+    for (const label of labels) {
+      expect(label).toMatch(/^(Demo|Repositorio) de .+\. Abre en una nueva pestaña$/);
     }
   });
 
@@ -133,9 +168,25 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     await page.goto('/404.html');
 
     await expect(page).toHaveTitle(/Página no encontrada/);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      'content',
+      /noindex/,
+    );
+    await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+    await expect(page.locator('meta[property="og:url"]')).toHaveCount(0);
+    await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(0);
+
     const homeLink = page.locator('a[href="/"]');
     await expect(homeLink).toBeVisible();
     expect(errors).toEqual([]);
+  });
+
+  test('la home conserva canonical, og:url y JSON-LD', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
+    await expect(page.locator('meta[property="og:url"]')).toHaveCount(1);
+    await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
   });
 
   test('no hay scroll horizontal de 360px a 1440px', async ({ page }) => {
@@ -162,17 +213,13 @@ test.describe('Portafolio Carlos Gutierrez - E2E & A11y', () => {
     expect(errors).toEqual([]);
   });
 
-  test('accesibilidad con axe sin violaciones criticas ni serias', async ({ page }) => {
+  test('accesibilidad con axe sin violaciones', async ({ page }) => {
     await page.goto('/');
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
 
-    const blockingViolations = results.violations.filter((v) =>
-      ['critical', 'serious'].includes(v.impact ?? '')
-    );
-
-    expect(blockingViolations).toEqual([]);
+    expect(results.violations).toEqual([]);
   });
 });
